@@ -12,7 +12,15 @@
 
 支持环境列表
 ---------------------
-.. 此处可以暂时留空，后续直接挂引用
+
+- :ref:`SMAC`
+- :ref:`SMACv2`
+- :ref:`MAMuJoCo`
+- :ref:`MPE`
+- :ref:`GRF`
+- :ref:`Gym`
+- :ref:`Toy`
+- :ref:`MetaDrive`
 
 支持MARL算法列表
 ---------------------

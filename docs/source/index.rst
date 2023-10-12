@@ -3,13 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to AMB's documentation!
-===============================
+欢迎使用 Adv MARL Benchmark 文档！
+==========================================
 
 .. toctree::
    :maxdepth: 2
    :numbered:
-   :caption: Contents:
+   :caption: 文档目录
 
    handbook/introduction
    handbook/architecture
@@ -19,7 +19,7 @@ Welcome to AMB's documentation!
    handbook/adversarial
 
 
-Indices and tables
+索引和表格
 ===============================
 
 * :ref:`genindex`
