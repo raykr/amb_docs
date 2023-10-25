@@ -18,6 +18,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
     'sphinx.ext.mathjax',
+    'sphinxcontrib.bibtex',
     'myst_parser',
 ]
 
@@ -31,3 +32,5 @@ language = 'zh_CN'
 
 html_theme = 'sphinx_rtd_theme'
 html_static_path = ['_static']
+
+bibtex_bibfiles = ['refs.bib']

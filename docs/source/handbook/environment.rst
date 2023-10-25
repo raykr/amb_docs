@@ -7,7 +7,7 @@
 SMAC
 ---------------------
 
-.. image:: ../images/env/smac.png
+.. image:: ../_static/images/env/smac.png
 
 SMAC 是 WhiRL 基于暴雪星际争霸 II RTS 游戏的协作多智能体强化学习 (MARL) 领域的研究环境。 
 SMAC 利用暴雪的星际争霸 II 机器学习 API 和 DeepMind 的 PySC2 为自主代理提供便捷的接口，以便与星际争霸 II 交互、获取观察结果并执行操作。
