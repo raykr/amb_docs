@@ -13,7 +13,7 @@
 .. _figure_attack_state:
 
 .. figure:: ../_static/images/adv/attack_state.png
-    :width: 80%
+    :width: 60%
     :align: center
 
     基于状态的对抗攻击算法示意图
@@ -229,6 +229,66 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
 
 对决场景下的攻击
 ------------------------
+
+在星际争霸II（SMAC）的环境中，我们自定义了一种对决场景，即将对阵的两个智能体团体分为天使组（Angel）和恶魔组（Demon），团队间是处于攻击、竞争状态，而团队内部是完全合作模式。在这样的场景中，可以分别训练Angel和Demon。
+
+在对决场景下训练的多智能体模型，又可以进行针对观测的扰动攻击和针对训练攻击策略的内鬼攻击。
+
+**无攻击下对决训练Pipeline**
+
+1. 在每个episode中，将执行以下收集数据的操作：
+
+   * Angel智能体执行 ``collect`` ，得到 ``angel_actions``
+   * Demon智能体执行 ``perform`` ，得到 ``demon_actions``
+   * 与环境交互，执行 ``env.step((angel_actions, demon_actions), filled)`` ，得到 ``obs, rewards, dones, infos`` 等数据
+   * 将数据插入到 ``buffer`` 中
+
+2. 执行 ``buffer.compute_nstep_rewards`` ，计算nstep奖励 ``rewards``
+3. 调用Angel算法的 ``train`` 进行对Angel智能体的训练
+
+**调用方法**
+
+Dual Algorithm Training
+
+.. code-block:: bash
+
+    # In dual training, "angel" and "demon" are two competitive teams, where we only train "angel" but fix "demon".
+    python -u dual_train.py --env <env_name> --angel <angel_algo_name> --demon <demon_algo_name> --exp_name <exp_name> --run dual
+
+
+Load Victim Config from Directory
+
+.. code-block:: bash
+
+    # In dual training, you can load angel and demon separately, even from single training checkpoint.
+    python -u dual_train.py --env <env_name> --load_angel <dir/to/angel/results> --load_victim <dir/to/demon/results> --exp_name <exp_name> --run dual
+
+
+
+对决场景下的内鬼攻击
+++++++++++++++++++++++++++++++++++++++
+
+**在Angel组中选定内鬼进行攻击Pipeline**
+
+1. 在每个episode中，将执行以下收集数据的操作：
+
+   * 执行 ``collect`` 操作，其中分两部分，指定为对手的智能体执行 ``sample`` 操作，其他智能体执行 ``collect`` 操作，得到 ``adv_actions``
+   * Victim智能体执行 ``perform`` ，得到 ``victim_actions``
+   * Demon智能体执行 ``perform`` ，得到 ``demon_actions``
+   * 与环境交互，执行 ``env.step((victim_actions, demon_actions), filled)`` ，得到 ``obs, rewards, dones, infos`` 等数据
+   * 将数据插入到 ``buffer`` 中
+
+2. 执行 ``buffer.compute_nstep_rewards`` ，计算nstep奖励 ``rewards``
+3. 调用对手智能体算法的 ``train`` 进行对对手智能体的训练
+
+**调用方法**
+
+只需要在对决训练的 ``--run`` 参数设置为 ``traitor`` 即可。
+
+.. code-block:: bash
+
+    # In dual training, you can load angel and demon separately, even from single training checkpoint.
+    python -u dual_train.py --env <env_name> --load_angel <dir/to/angel/results> --load_victim <dir/to/demon/results> --exp_name <exp_name> --run traitor
 
 
 
