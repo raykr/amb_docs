@@ -24,3 +24,143 @@
 对于评测结果可落地而言，本平台集成无人机控制、无人车控制、电网控制、灵巧手控制等高保真多智能体强化学习环境，并对于这些环境进行全方位的鲁棒性评价与测试，其结果将有助于这些领域的工作者在应用多智能体强化学习算法的过程中，评估不同多智能体强化学习算法在其领域内的性能和鲁棒性，并决定使用哪种多智能体强化学习算法、哪种多智能体强化学习技巧进行训练。
 
 对于模型环境可自定而言，本平台将多智能体强化学习智能体抽象为Agent类，对于本平台未集成的自定义多智能体强化学习算法实现，只需令待评测智能体满足Agent类规定的接口，即可将其上传至本平台进行评测。对于自定义环境而言，本平台满足任意基于Gym环境接口的算法评测，用户可以根据自身需要，灵活方便地进行自定义。
+
+
+项目成员
+============
+
+项目成员来自北京航空航天大学复杂关键软件环境全国重点实验室，包括：
+
+Faculty
+-----------------
+
+.. raw:: html
+
+   <center>
+        <figure>
+           <div align="left">
+                <div style="display:inline-block; width:35%; vertical-align:top">
+                    <img src="../_static/images/person/liuxianglong.jpg" style="width:200px; height:300px; margin-top: 10px;"/>
+                </div>
+                <div style="display:inline-block; width:60%">
+                    <h1 align="left">Xianglong Liu</h1>
+                    <p align="left" class="note">Professor</p>
+                    <p align="left"> <a href="http://www.nlsde.buaa.edu.cn/">State Key Laboratory of Software Development Environment</a><br>
+                    School of Computer Science and Engineering, Beihang University, China</p>
+                    <p align="left"> Office: Room G606, New Main Building<br>
+                        Address: 37 Xueyuan Road, Haidian, Beijing, China 100191<br>
+                        Tel.: +86-10-8233-8092 <br>
+                        Email: xlliu@nlsde.buaa.edu.cn / xlliu@buaa.edu.cn
+                    </p>
+                    <p align="left">
+                        <a href="http://sites.nlsde.buaa.edu.cn/~xlliu/">Homepage</a>
+                    </p>
+                </div>
+            </div>
+        </figure> 
+    </center>
+
+
+.. raw:: html
+
+   <center>
+       <figure>
+           <div align="left">
+                <div style="display:inline-block; width:35%; vertical-align:top">
+                    <img src="../_static/images/person/liuaishan.jpg" style="width:200px; height:300px; margin-top: 10px;"/>
+                </div>
+                <div style="display:inline-block; width:60%">
+                    <h1 align="left">Aishan Liu</h1>
+                    <p align="left" class="note">Associate Professor</p>
+                    <p align="left"> <a href="http://www.nlsde.buaa.edu.cn/">State Key Laboratory of Software Development Environment</a><br>
+                    School of Computer Science and Engineering, Beihang University, China</p>
+
+                    <p align="left"> 
+                        Office: Room G608, New Main Building<br>
+                        Email: liuaishan@buaa.edu.cn / liuaishan@nlsde.buaa.edu.cn<br>
+                        Address: No.37 Xueyuan Rd., Beijing, China
+                    </p>
+                    <p align="left">
+                        Homepage: 
+                        <a href="http://sites.nlsde.buaa.edu.cn/~liuaishan/">Link1</a>
+                        <a href="https://liuaishan.github.io/">Link2</a>
+                    </p>
+                </div>
+            </div>
+        </figure> 
+    </center>
+
+
+
+PhD Students
+-----------------
+
+.. raw:: html
+
+   <center>
+       <figure>
+           <div align="left">
+                <div style="display:inline-block; width:35%; vertical-align:top">
+                    <img src="../_static/images/person/lisimin.jpg" style="width:200px; height:300px; margin-top: 10px;"/>
+                </div>
+                <div style="display:inline-block; width:60%">
+                    <h1 align="left">李思民</h1>
+                    <p align="left" class="note">博士三年级学生</p>
+                    <p align="left"> 
+                        <a href="http://www.nlsde.buaa.edu.cn/">北航复杂关键软件环境全国重点实验室</a><br>
+                        北航计算机学院
+                    </p>
+                    <p align="left"> 
+                        邮箱：lisiminsimon@buaa.edu.cn<br>
+                        地址：北京航空航天大学新主楼G602
+                    </p>
+                    <p align="left">
+                        主页：<a href="https://siminli.github.io">https://siminli.github.io</a>
+                    </p>
+                </div>
+            </div>
+        </figure> 
+    </center>
+
+
+MPhil Students
+-----------------
+
+.. raw:: html
+
+    <center>
+        <figure>
+            <div align="left">
+                <div style="display:inline-block; width:30%" align="center">
+                    <div  style="margin:10px">
+                        <img src="../_static/images/person/guojun.jpg" style="height:250px;"/>
+                    </div>
+                    <h5>郭骏</h5>
+                </div>
+                <div style="display:inline-block; width:30%" align="center">
+                    <div  style="margin:10px">
+                        <img src="../_static/images/person/jingzonglei.jpg" style="height:250px;"/>
+                    </div>
+                    <h5>景宗雷</h5>
+                </div>
+            </div>
+        </figure> 
+    </center>
+
+Undergraduate Students
+----------------------------------
+
+.. raw:: html
+
+    <center>
+        <figure>
+            <div align="left">
+                <div style="display:inline-block; width:30%" align="center">
+                    <div  style="margin:10px">
+                        <img src="../_static/images/person/zhouboyang.jpg"/>
+                    </div>
+                    <h5>周伯阳</h5>
+                </div>
+            </div>
+        </figure> 
+    </center>

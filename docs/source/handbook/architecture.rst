@@ -2,6 +2,7 @@
 ============
 
 .. 这里放置项目架构图
+.. image:: ../_static/images/code-arch.png
 
 
 算法内核简介
@@ -132,7 +133,10 @@ utils目录下存放的是一些工具函数，包括配置文件的读取、模
 - :ref:`GRF`
 - :ref:`Gym`
 - :ref:`Toy`
-- :ref:`MetaDrive`
+- :ref:`Bi-DexHands`
+- :ref:`Quads`
+- :ref:`Network`
+- :ref:`Voltage`
 
 支持MARL算法列表
 ---------------------
