@@ -9,9 +9,16 @@ pip install -r requirements.txt
 
 ## Usage
 
+1. Manual build.
 ```
 cd docs
 make html
+```
+
+2. auto build.
+```
+cd docs
+sphinx-autobuild source build/html --port 8012
 ```
 
 ## Documentations
