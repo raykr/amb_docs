@@ -6,7 +6,7 @@
 
 
 基于观测空间的对抗扰动攻击
---------------
+----------------------------
 
 基于状态的攻击（如图 :ref:`figure_attack_state` 所示）可分为两类：基于观测的对抗攻击与基于环境的对抗攻击。其中，基于观测的对抗攻击主要通过扰动智能体的观测值 :math:`s` ，从而改变智能体策略 :math:`\pi(s) = p(s|a)` 来实现攻击 :cite:`behzadan2017vulnerability,huang2017adversarial` ；基于环境的对抗攻击在环境中添加对智能体观测值 :math:`s` 的扰动的同时，还要求此扰动符合状态转移方程 :math:`\mathcal{T}=p\left(s^{\prime}, r \mid s, a\right)` 。
 
