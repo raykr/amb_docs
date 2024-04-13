@@ -54,11 +54,56 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
 
     随机高斯噪声攻击模块
 
+**配置项**
+
+.. code-block:: yaml
+
+    # Unmodifiable configuration items
+    num_env_steps: 0 # No training required, just perturb the observation
+    perturb_iters: 0 
+    adaptive_alpha: False
+    targeted_attack: False
+
+    # Modifiable configuration items
+    # the id of adversarial agents
+    adv_agent_ids: [0]
+    # the range of timestep that can be perturbed, e.g.: "1-10,15,20"
+    perturb_timesteps: ~
+    # perturbation parameters
+    # the budget of perturbation (in L-inf norm)
+    perturb_epsilon: 0.2
+    # if adaptive_alpha=False, the budget of perturbation in every iteration
+    perturb_alpha: 0.05
+    # the criterion function when calculating the distance of actions
+    criterion: default
+    
+
+**使用方法**
+
+先训练victim智能体
+
+.. code-block:: bash
+
+    python -u single_train.py --env <env_name> --algo <algo_name> --exp_name <exp_name> --run single
+
+再训练adversary智能体，执行攻击
+
+.. code-block:: bash
+
+    python -u single_train.py --env <env_name> --algo <perturbation_algo_name> --exp_name <exp_name> --run perturbation --victim <victim_algo_name> --victim.model_dir <dir/to/your/model>
+
+
 
 最优动作抑制的扰动攻击
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 这是一种基于状态的攻击算法，首先在多智能体系统中，选择一个或多个智能体作为攻击者（adversary），其他为在受害者（victim），通过在受害者的观测上添加基于梯度的多次迭代对抗扰动，生成的对抗性观测，作为攻击者的观测，从而影响攻击者的策略，使其做出最小化受害者目标函数的决策。
+
+.. figure:: ../_static/images/adv/iterative_perturbation.png
+    :width: 70%
+    :align: center
+
+    最优动作抑制的扰动攻击示意图
 
 **IGS攻击模块**
 
@@ -105,6 +150,8 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
     criterion: default
     # if targeted, load the adversarial policies and perform targeted attack
     targeted_attack: False
+    # No training required, just perturb the observation
+    num_env_steps: 0
 
 **使用方法**
 
@@ -122,9 +169,56 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
 
 
 自适应动作的扰动攻击
-^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-该算法与IGS算法的流程基本类似，只是不再需要训练过程，而是直接加载一个已经训练好的对手模型，然后对受害者模型进行攻击。
+针对上述最优动作抑制迭代扰动攻击的不足，自适应动作目标迭代扰动攻击算法使用额外的强化学习算法建模动作和全局回报的关系，将攻击目标从每步最优动作调整为全局最大回报。具体而言，自适应动作目标迭代扰动攻击引入一个额外的策略网络 :math:`\boldsymbol{\pi}^b(\boldsymbol{b}^b|\boldsymbol{o}_k^\alpha)` ，其目标是最小化被攻击者的全局回报 :math:`G` 。该策略可以使用时间差分或策略梯度算法进行训练，被攻击的智能体以 :math:`\boldsymbol{a}^b` 为目标，对其局部观测进行 :math:`k` 次PGD迭代扰动后，所输出的动作 :math:`\boldsymbol{a}_{t,k}^\alpha` 对整体智能体来说是最差动作，即其单步奖励为 :math:`-R(s_t, \boldsymbol{a}_{t,k}^\alpha, \boldsymbol{a}_t^{\nu})` ，并以此为目标即可实现最小化被攻击者的全局回报，如下图所示。
+
+
+.. figure:: ../_static/images/adv/adaptive_action.png
+    :width: 70%
+    :align: center
+
+    自适应动作的扰动攻击示意图
+
+**配置项**
+
+.. code-block:: yaml
+
+    # adversarial policy parameters
+    # the id of adversarial agents
+    adv_agent_ids: [0]
+    # the range of timestep that can be perturbed, e.g.: "1-10,15,20"
+    perturb_timesteps: ~
+    # perturbation parameters
+    # the budget of perturbation (in L-inf norm)
+    perturb_epsilon: 0.2
+    # the iterations of gradient backwards for perturbations
+    perturb_iters: 10
+    # adaptively calculate the proper alpha
+    adaptive_alpha: True
+    # if adaptive_alpha=False, the budget of perturbation in every iteration
+    perturb_alpha: 0.05
+    # the criterion function when calculating the distance of actions
+    criterion: default
+    # if targeted, load the adversarial policies and perform targeted attack
+    targeted_attack: True
+    # Training required
+    num_env_steps: 5000000
+
+**使用方法**
+
+先训练victim智能体
+
+.. code-block:: bash
+
+    python -u single_train.py --env <env_name> --algo <algo_name> --exp_name <exp_name> --run single
+
+再训练adversary智能体，执行攻击
+
+.. code-block:: bash
+
+    python -u single_train.py --env <env_name> --algo <perturbation_algo_name> --exp_name <exp_name> --run perturbation --victim <victim_algo_name> --victim.model_dir <dir/to/your/model>
+
 
 
 基于少数控制的对抗诱导攻击
@@ -152,11 +246,43 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
 随机策略攻击
 ^^^^^^^^^^^^^^^^^^
 
+随机策略替换攻击是基于少数控制的对抗诱导攻击理论延伸出的一种最基础的攻击方式，其核心思想是在不变动其他智能体策略的情况下，将被攻击智能体的策略直接替换为随机策略，即对被攻击智能体的策略网络参数进行随机初始化，从而影响智能体系统的全局回报。
+
+**配置项**
+
+.. code-block:: yaml
+
+    # adversarial policy parameters
+    # the id of adversarial agents
+    adv_agent_ids: [0]
+    # No training required
+    num_env_steps: 0
+
+**使用方法**
+
+先训练victim智能体
+
+.. code-block:: bash
+
+    python -u single_train.py --env <env_name> --algo <algo_name> --exp_name <exp_name> --run single
+
+再训练adversary智能体，执行攻击
+
+.. code-block:: bash
+
+    python -u single_train.py --env <env_name> --algo <taitor_algo_name> --exp_name <exp_name> --run taitor --victim <victim_algo_name> --victim.model_dir <dir/to/your/model>
+
 
 零和博弈策略攻击
 ^^^^^^^^^^^^^^^^^^
 
 本项目中的内鬼攻击是通过在多智能体系统中选定一个或多个智能体作为内鬼（或对手），训练对手的策略，让其做出降低整体奖励的动作，从而影响其他智能体的策略，使其做出最小化目标函数的决策。
+
+.. figure:: ../_static/images/adv/traitor.png
+    :width: 70%
+    :align: center
+
+    零和博弈策略攻击示意图
 
 **训练Pipeline**
 
@@ -173,21 +299,8 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
     # adversarial policy parameters
     # the id of adversarial agents
     adv_agent_ids: [0]
-    # the range of timestep that can be perturbed, e.g.: "1-10,15,20"
-    perturb_timesteps: ~
-    # perturbation parameters
-    # the budget of perturbation (in L-inf norm)
-    perturb_epsilon: 0.2
-    # the iterations of gradient backwards for perturbations
-    perturb_iters: 10
-    # adaptively calculate the proper alpha
-    adaptive_alpha: True
-    # if adaptive_alpha=False, the budget of perturbation in every iteration
-    perturb_alpha: 0.05
-    # the criterion function when calculating the distance of actions
-    criterion: default
-    # if targeted, load the adversarial policies and perform targeted attack
-    targeted_attack: False
+    # Training required
+    num_env_steps: 5000000
 
 **使用方法**
 
@@ -227,7 +340,7 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
 
 
 基于群体对战的对抗策略攻击
-------------------------
+----------------------------------------------
 
 在星际争霸II（SMAC）的环境中，我们自定义了一种对决场景，即将对阵的两个智能体团体分为天使组（Angel）和恶魔组（Demon），团队间是处于攻击、竞争状态，而团队内部是完全合作模式。在这样的场景中，可以分别训练Angel和Demon。
 
