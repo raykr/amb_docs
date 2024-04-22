@@ -18,6 +18,8 @@
 
     基于状态的对抗攻击算法示意图
 
+.. _RandomNoise:
+
 随机噪声攻击
 ^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -92,7 +94,7 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
 
     python -u single_train.py --env <env_name> --algo <perturbation_algo_name> --exp_name <exp_name> --run perturbation --victim <victim_algo_name> --victim.model_dir <dir/to/your/model>
 
-
+.. _IterativePerturbation:
 
 最优动作抑制的扰动攻击
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -167,6 +169,7 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
 
     python -u single_train.py --env <env_name> --algo <perturbation_algo_name> --exp_name <exp_name> --run perturbation --victim <victim_algo_name> --victim.model_dir <dir/to/your/model>
 
+.. _AdaptiveAction:
 
 自适应动作的扰动攻击
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -242,6 +245,7 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
 
     对抗性策略示意图
 
+.. _RandomPolicy:
 
 随机策略攻击
 ^^^^^^^^^^^^^^^^^^
@@ -272,6 +276,7 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
 
     python -u single_train.py --env <env_name> --algo <taitor_algo_name> --exp_name <exp_name> --run taitor --victim <victim_algo_name> --victim.model_dir <dir/to/your/model>
 
+.. _Traitor:
 
 零和博弈策略攻击
 ^^^^^^^^^^^^^^^^^^
@@ -338,6 +343,7 @@ Huang 等人 :cite:`huang2017adversarial` 最先对通过深度强化学习得�
 
     adv_agent_ids: [0, 2] # 指定agent0和agent2为对手，其他智能体为受害者
 
+.. _Dual:
 
 基于群体对战的对抗策略攻击
 ----------------------------------------------
@@ -374,7 +380,6 @@ Load Victim Config from Directory
 
     # In dual training, you can load angel and demon separately, even from single training checkpoint.
     python -u dual_train.py --env <env_name> --load_angel <dir/to/angel/results> --load_victim <dir/to/demon/results> --exp_name <exp_name> --run dual
-
 
 
 对决场景下的内鬼攻击

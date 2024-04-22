@@ -142,8 +142,21 @@ utils目录下存放的是一些工具函数，包括配置文件的读取、模
 ---------------------
 .. 此处可以暂时留空，后续直接挂引用
 
+- :ref:`IPPO`
+- :ref:`MAPPO`
+- :ref:`MADDPG`
+- :ref:`IQL`
+- :ref:`VDN`
+- :ref:`QMIX`
+
 
 支持对抗攻击算法列表
 ---------------------
 .. 此处可以暂时留空，后续直接挂引用
 
+- :ref:`RandomNoise`
+- :ref:`IterativePerturbation`
+- :ref:`AdaptiveAction`
+- :ref:`RandomPolicy`
+- :ref:`Traitor`
+- :ref:`Dual`
