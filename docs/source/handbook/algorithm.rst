@@ -247,8 +247,6 @@ VDN(Value_Decomposition NetWorks) 遵循和其他 Q-learning 算法相同的数�
 
 QMIX
 ---------------------
-<<<<<<< HEAD
-=======
 
 概念
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -280,4 +278,3 @@ QMIX 需要不同的智能体共享信息，此处使用加粗的符号来标识
 .. math::
 
      L(\phi, D) = \mathbb{E}_{\tau \sim D} \left[ Q^{tot}_\phi - \left( r + \gamma (1 - d) Q^{tot'}_{\phi_{targ}} \right)^2 \right]
->>>>>>> master
