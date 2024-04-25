@@ -59,7 +59,7 @@ IPPO（Independent Proximal Policy Optimization）是一种完全去中心化（
 
 .. hint:: 
 
-    实际上，缓冲区和智能体模型可以在不同的智能体之间共享也可以单独训练，这适用于全部 PPO 类算法。
+    实际上，缓冲区和智能体模型可以在不同的智能体之间选择是否共享，这适用于全部 PPO 类算法。
 
 .. _MAPPO:
 
@@ -179,6 +179,14 @@ IQL(Independent Q learning) 是 Q-learning 算法在多智能体环境下的自�
 形式化定义
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Q 值更新的方式如下：
+
+.. math::
+
+    Q(s, a) = (1 - \alpha) Q(s, a) + \alpha (r + \gamma \max_{a'} Q(s', a'))
+
+目标是最小化预测 Q 值与从贝尔曼方程获得的目标 Q 值之间的差异。
+
 .. math::
 
     \phi_{k+1} = \arg\min_\phi \left( Q_\phi(s, a) - (r + \lambda \cdot \max_{a'} Q_{\phi_{\text{tar}}}(s', a')) \right)^2
@@ -267,7 +275,7 @@ QMIX
 
 QMIX 需要不同的智能体共享信息，此处使用加粗的符号来标识包含多个智能体的信息。
 
-:math:`Q-mix` ：基于前馈神经网络实现的混合器，通过 :math:`Q-mix`` 混合全部 Q 值来计算全局 Q 值。
+:math:`Q-mix` ：基于前馈神经网络实现的混合器，通过 :math:`Q-mix` 混合全部 Q 值来计算全局 Q 值。
 
 .. math::
 
