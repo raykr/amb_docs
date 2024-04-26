@@ -61,37 +61,6 @@ Faculty
     </center>
 
 
-.. raw:: html
-
-   <center>
-       <figure>
-           <div align="left">
-                <div style="display:inline-block; width:35%; vertical-align:top">
-                    <img src="../_static/images/person/liuaishan.jpg" style="width:200px; height:300px; margin-top: 10px;"/>
-                </div>
-                <div style="display:inline-block; width:60%">
-                    <h1 align="left">Aishan Liu</h1>
-                    <p align="left" class="note">Associate Professor</p>
-                    <p align="left"> <a href="http://www.nlsde.buaa.edu.cn/">State Key Laboratory of Software Development Environment</a><br>
-                    School of Computer Science and Engineering, Beihang University, China</p>
-
-                    <p align="left"> 
-                        Office: Room G608, New Main Building<br>
-                        Email: liuaishan@buaa.edu.cn / liuaishan@nlsde.buaa.edu.cn<br>
-                        Address: No.37 Xueyuan Rd., Beijing, China
-                    </p>
-                    <p align="left">
-                        Homepage: 
-                        <a href="http://sites.nlsde.buaa.edu.cn/~liuaishan/">Link1</a>
-                        <a href="https://liuaishan.github.io/">Link2</a>
-                    </p>
-                </div>
-            </div>
-        </figure> 
-    </center>
-
-
-
 PhD Students
 -----------------
 
