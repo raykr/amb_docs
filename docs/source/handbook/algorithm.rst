@@ -286,3 +286,35 @@ QMIX 需要不同的智能体共享信息，此处使用加粗的符号来标识
 .. math::
 
      L(\phi, D) = \mathbb{E}_{\tau \sim D} \left[ Q^{tot}_\phi - \left( r + \gamma (1 - d) Q^{tot'}_{\phi_{targ}} \right)^2 \right]
+
+
+.. _HAPPO:
+
+HAPPO(Heterogeneous-Agent Proximal Policy Optimization)
+-------------------------------------------------------------------------------
+
+概念
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+HAPPO（异构近端体策略优化）是一种先进的多智能体强化学习算法，它在各种多智能体环境中表现出色，特别是在处理异质智能体的情况下。在多智能体MuJoCo环境中，HAPPO相比于传统的MAPPO算法展现了显著的优势，刷新了在策略上的最佳结果。在包含高达17个智能体的Humanoid控制任务中，HAPPO算法达到了行业领先水平，而MAPPO在这种高度异质的智能体任务中表现不佳，这凸显了HAPPO在促进异质智能体合作方面的优越性。总体而言，HAPPO是一种有效的多智能体强化学习算法，特别适合于处理具有高度异质性和复杂协作需求的智能体环境。
+
+
+形式化定义
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+HAPPO在算法逻辑结构上与MAPPO类似，主要差别在于HAPPO会在更新完每个Agent策略后还要更新一下 ``factor``，而该 ``factor`` 的作用大致是平衡旧策略和新策略。其作用流程是，在训练前后分别计算 ``logprob`` → 计算 ``factor`` → 将 ``factor`` 更新到 ``buffer`` 中 → ``buffer`` 的数据用来训练，形成闭环。
+
+.. math::
+
+   \mathbb{E}_{\mathrm{s} \sim \rho_{\boldsymbol{\pi}_{\boldsymbol{k}}}, \mathbf{a}^{\sim} \pi_{\boldsymbol{\theta}_{\boldsymbol{k}}}}\left[\min \left(\frac{\pi_{\theta^{i m}}^{i_m}\left(\mathrm{a}^i \mid \mathrm{s}\right)}{\pi_{\theta_k^{i_m}}^{i_m}\left(\mathrm{a}^i \mid \mathrm{s}\right)} M^{i_{1: m}}(\mathrm{~s}, \mathbf{a}), \operatorname{clip}\left(\frac{\pi_{\theta^{i m}}^{i_m}\left(\mathrm{a}^i \mid \mathrm{s}\right)}{\pi_{\theta_k^{i_m}}\left(\mathrm{a}^i \mid \mathrm{s}\right)}, 1 \pm \epsilon\right) M^{i_{1: m}}(\mathrm{~s}, \mathbf{a})\right)\right]
+
+
+其中， ``factor`` 的定义如下：
+
+.. math::
+
+   M^{i_{1: m}}=\frac{\overline{\boldsymbol{\pi}}^{i_{1: m-1}-1}\left(\mathbf{a}^{i_{1: m-1}} \mid s\right)}{\boldsymbol{\pi}^{i_{1: m-1}}\left(\mathbf{a}^{i_{1: m-1}} \mid s\right)} \hat{A}(s, \mathbf{a})
+   
+
+相关链接：
+    - `HAPPO <https://github.com/PKU-MARL/HARL>`__
