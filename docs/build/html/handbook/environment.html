@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. 环境介绍 &mdash; AMB v1.0.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=12f31cd9"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="6. 多智能体强化学习算法介绍" href="algorithm.html" />
+    <link rel="prev" title="4. 快速开始" href="quickstart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AMB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">文档目录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. 平台简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#id4">2. 项目成员</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">3. 项目架构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">4. 快速开始</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. 环境介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#smac">5.1. SMAC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">5.1.1. 环境特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">5.1.2. 安装方法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#starcraft-ii">5.1.2.1. 安装 StarCraft II</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">5.1.2.2. 安装SMAC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">5.1.3. 使用方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#smacv2">5.2. SMACv2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id8">5.2.1. 环境特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">5.2.2. 安装方法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">5.2.2.1. 安装 StarCraft II</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">5.2.2.2. 安装SMACv2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">5.2.3. 使用方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#multi-agent-mujoco">5.3. Multi-Agent MuJoCo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">5.3.1. 环境特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">5.3.2. 安装方法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mujoco">5.3.2.1. 安装 mujoco</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gymnasium-robotics">5.3.2.2. 安装 gymnasium-robotics</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">5.3.3. 使用方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pettingzoo-mpe">5.4. PettingZoo MPE</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id16">5.4.1. 环境特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id17">5.4.2. 安装方法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pettingzoo-1-24-1">5.4.2.1. 安装 pettingzoo==1.24.1</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id18">5.4.3. 使用方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#google-research-football">5.5. Google Research Football</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id20">5.5.1. 环境特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id21">5.5.2. 安装方法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id22">5.5.2.1. 安装 Google Research Football</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id23">5.5.3. 使用方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#gym">5.6. Gym</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id25">5.6.1. 环境特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id26">5.6.2. 安装方法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id27">5.6.2.1. 安装 gym</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id28">5.6.3. 使用方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#toy-example">5.7. Toy Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id29">5.7.1. 环境特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id30">5.7.2. 安装方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id31">5.7.3. 使用方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bi-dexhands">5.8. Bi-DexHands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id34">5.8.1. 环境特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id35">5.8.2. 安装方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id36">5.8.3. 使用方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#quadrotor-swarms">5.9. Quadrotor Swarms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id37">5.9.1. 环境特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id38">5.9.2. 安装方法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id39">5.9.3. 使用方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#network-system-control">5.10. Network System Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id40">5.10.1. 环境特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id41">5.10.2. 安装依赖</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id42">5.10.3. 使用方法</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#voltage-control">5.11. Voltage Control</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id43">5.11.1. 环境特征</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id44">5.11.2. 安装依赖</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id45">5.11.3. 使用方法</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="algorithm.html">6. 多智能体强化学习算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adversarial.html">7. 对抗攻击算法介绍</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AMB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>环境介绍</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/handbook/environment.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">5. </span>环境介绍<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="smac">
+<span id="id2"></span><h2><span class="section-number">5.1. </span>SMAC<a class="headerlink" href="#smac" title="Link to this heading"></a></h2>
+<img alt="../_images/smac.png" src="../_images/smac.png" />
+<p>SMAC 是 WhiRL 基于暴雪星际争霸 II RTS 游戏的协作多智能体强化学习 (MARL) 领域的研究环境。
+SMAC 利用暴雪的星际争霸 II 机器学习 API 和 DeepMind 的 PySC2 为自主代理提供便捷的接口，以便与星际争霸 II 交互、获取观察结果并执行操作。
+与 PySC2 不同，SMAC 专注于去中心化的微观管理场景，其中游戏的每个单元都由单独的 RL 代理控制。</p>
+<p>官方链接: <a class="reference external" href="https://github.com/oxwhirl/smac">oxwhirl/smac</a></p>
+<section id="id3">
+<h3><span class="section-number">5.1.1. </span>环境特征<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>环境</p></th>
+<th class="head"><p>任务模式</p></th>
+<th class="head"><p>可观测性</p></th>
+<th class="head"><p>动作空间</p></th>
+<th class="head"><p>回报</p></th>
+<th class="head"><p>交互模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SMAC</p></td>
+<td><p>合作</p></td>
+<td><p>部分可观测</p></td>
+<td><p>离散</p></td>
+<td><p>稠密/稀疏</p></td>
+<td><p>同时</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id4">
+<h3><span class="section-number">5.1.2. </span>安装方法<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="starcraft-ii">
+<h4><span class="section-number">5.1.2.1. </span>安装 StarCraft II<a class="headerlink" href="#starcraft-ii" title="Link to this heading"></a></h4>
+<p>StarCraftII 是 SMAC 所调用的游戏引擎， SMAC 需要通过调用 StarCraftII 游戏引擎进行对局，所以在安装 SMAC 之前要安装 StarCraftII 。</p>
+<p>切换到要安装StarCraftII的目录，然后运行以下命令：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://blzdistsc2-a.akamaihd.net/Linux/SC2.4.10.zip
+unzip<span class="w"> </span>-P<span class="w"> </span>iagreetotheeula<span class="w"> </span>SC2.4.10.zip
+rm<span class="w"> </span>-rf<span class="w"> </span>SC2.4.10.zip
+<span class="nb">cd</span><span class="w"> </span>StarCraftII/
+wget<span class="w"> </span>https://raw.githubusercontent.com/Blizzard/s2client-proto/master/stableid.json
+</pre></div>
+</div>
+<p>在 <code class="docutils literal notranslate"><span class="pre">~/.</span> <span class="pre">bashrc</span></code> 中添加以下行：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">SC2PATH</span><span class="o">=</span><span class="s2">&quot;/path/to/your/StarCraftII&quot;</span>
+</pre></div>
+</div>
+<p>将 <code class="docutils literal notranslate"><span class="pre">amb/envs/smac/SMAC_Maps</span></code> 目录复制到 <code class="docutils literal notranslate"><span class="pre">StarCraftII/Maps</span></code> 。</p>
+</section>
+<section id="id5">
+<h4><span class="section-number">5.1.2.2. </span>安装SMAC<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/oxwhirl/smac.git
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id6">
+<h3><span class="section-number">5.1.3. </span>使用方法<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>更改 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/smac.yaml</span></code> 配置项：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3s_vs_4z</span>
+<span class="nt">state_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">FP</span><span class="w"> </span><span class="c1"># choose from FP (Feature Pruned) and EP (Environment Provided)</span>
+<span class="nt">replay_dir</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="nt">replay_prefix</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+</pre></div>
+</div>
+<p>训练时指定环境：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>smac<span class="w"> </span>--algo<span class="w"> </span>mappo<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">提示</p>
+<p>项目可自动查找环境名称对应的配置项，保持名称相同即可。</p>
+</div>
+</section>
+</section>
+<section id="smacv2">
+<span id="id7"></span><h2><span class="section-number">5.2. </span>SMACv2<a class="headerlink" href="#smacv2" title="Link to this heading"></a></h2>
+<img alt="../_images/smacv2.png" src="../_images/smacv2.png" />
+<p>SMACv2 是对 SMAC 的更新， SMACv2 和 SMAC 主要是关注非中心的具体场景，而不是一场完整的游戏对局。
+SMACv2 和 SMAC 同样通过 DeepMind 提供的 pysc2 和 Blizzard 提供的 StarCraftII 机器学习 API 。</p>
+<p>SMACv2 相对于 SMAC 进行了三项主要改动:</p>
+<ul class="simple">
+<li><p>随机化起始位置</p></li>
+<li><p>随机化单位类型</p></li>
+<li><p>更改单位的视野范围和攻击范围</p></li>
+</ul>
+<p>官方链接: <a class="reference external" href="https://github.com/oxwhirl/smacv2">oxwhirl/smacv2</a></p>
+<section id="id8">
+<h3><span class="section-number">5.2.1. </span>环境特征<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>环境</p></th>
+<th class="head"><p>任务模式</p></th>
+<th class="head"><p>可观测性</p></th>
+<th class="head"><p>动作空间</p></th>
+<th class="head"><p>回报</p></th>
+<th class="head"><p>交互模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SMACv2</p></td>
+<td><p>合作</p></td>
+<td><p>部分可观测</p></td>
+<td><p>离散</p></td>
+<td><p>稠密/稀疏</p></td>
+<td><p>同时</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id9">
+<h3><span class="section-number">5.2.2. </span>安装方法<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<section id="id10">
+<h4><span class="section-number">5.2.2.1. </span>安装 StarCraft II<a class="headerlink" href="#id10" title="Link to this heading"></a></h4>
+<p>StarCraftII 是 SMAC 所调用的游戏引擎， SMAC 需要通过调用 StarCraftII 游戏引擎进行对局，所以在安装 SMAC 之前要安装 StarCraftII 。</p>
+<p>切换到要安装StarCraftII的目录，然后运行以下命令：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://blzdistsc2-a.akamaihd.net/Linux/SC2.4.10.zip
+unzip<span class="w"> </span>-P<span class="w"> </span>iagreetotheeula<span class="w"> </span>SC2.4.10.zip
+rm<span class="w"> </span>-rf<span class="w"> </span>SC2.4.10.zip
+<span class="nb">cd</span><span class="w"> </span>StarCraftII/
+wget<span class="w"> </span>https://raw.githubusercontent.com/Blizzard/s2client-proto/master/stableid.json
+</pre></div>
+</div>
+<p>在 <code class="docutils literal notranslate"><span class="pre">~/.</span> <span class="pre">bashrc</span></code> 中添加以下行：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">SC2PATH</span><span class="o">=</span><span class="s2">&quot;/path/to/your/StarCraftII&quot;</span>
+</pre></div>
+</div>
+<p>将 <code class="docutils literal notranslate"><span class="pre">amb/envs/smacv2/SMAC_Maps</span></code> 目录复制到 <code class="docutils literal notranslate"><span class="pre">StarCraftII/Maps</span></code> 。</p>
+</section>
+<section id="id11">
+<h4><span class="section-number">5.2.2.2. </span>安装SMACv2<a class="headerlink" href="#id11" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/oxwhirl/smacv2.git
+</pre></div>
+</div>
+<p>如果需要扩展 SMACv2 ，必须按照以下安装：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/oxwhirl/smacv2.git
+<span class="nb">cd</span><span class="w"> </span>smacv2
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id12">
+<h3><span class="section-number">5.2.3. </span>使用方法<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<p>更改 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/smacv2.yaml</span></code> 配置项：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">map_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">protoss_5_vs_5</span>
+</pre></div>
+</div>
+<p>修改该配置下的地图名称，会选择 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/smacv2_map_config</span></code> 下对应的地图配置文件  <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/smacv2_map_config/{map_name}.yaml</span></code> 。
+其中包括各种详细的设定。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>continuing_episode:<span class="w"> </span>False
+difficulty:<span class="w"> </span><span class="s2">&quot;7&quot;</span>
+game_version:<span class="w"> </span>null
+map_name:<span class="w"> </span><span class="s2">&quot;10gen_protoss&quot;</span>
+move_amount:<span class="w"> </span><span class="m">2</span>
+obs_all_health:<span class="w"> </span>True
+obs_instead_of_state:<span class="w"> </span>False
+obs_last_action:<span class="w"> </span>False
+obs_own_health:<span class="w"> </span>True
+obs_pathing_grid:<span class="w"> </span>False
+obs_terrain_height:<span class="w"> </span>False
+obs_timestep_number:<span class="w"> </span>False
+reward_death_value:<span class="w"> </span><span class="m">10</span>
+reward_defeat:<span class="w"> </span><span class="m">0</span>
+reward_negative_scale:<span class="w"> </span><span class="m">0</span>.5
+reward_only_positive:<span class="w"> </span>True
+reward_scale:<span class="w"> </span>True
+reward_scale_rate:<span class="w"> </span><span class="m">20</span>
+reward_sparse:<span class="w"> </span>False
+reward_win:<span class="w"> </span><span class="m">200</span>
+replay_dir:<span class="w"> </span><span class="s2">&quot;&quot;</span>
+replay_prefix:<span class="w"> </span><span class="s2">&quot;&quot;</span>
+conic_fov:<span class="w"> </span>False
+use_unit_ranges:<span class="w"> </span>True
+min_attack_range:<span class="w"> </span><span class="m">2</span>
+obs_own_pos:<span class="w"> </span>True
+num_fov_actions:<span class="w"> </span><span class="m">12</span>
+capability_config:
+n_units:<span class="w"> </span><span class="m">5</span>
+n_enemies:<span class="w"> </span><span class="m">5</span>
+team_gen:
+<span class="w">    </span>dist_type:<span class="w"> </span><span class="s2">&quot;weighted_teams&quot;</span>
+<span class="w">    </span>unit_types:
+<span class="w">    </span>-<span class="w"> </span><span class="s2">&quot;stalker&quot;</span>
+<span class="w">    </span>-<span class="w"> </span><span class="s2">&quot;zealot&quot;</span>
+<span class="w">    </span>-<span class="w"> </span><span class="s2">&quot;colossus&quot;</span>
+<span class="w">    </span>weights:
+<span class="w">    </span>-<span class="w"> </span><span class="m">0</span>.45
+<span class="w">    </span>-<span class="w"> </span><span class="m">0</span>.45
+<span class="w">    </span>-<span class="w"> </span><span class="m">0</span>.1
+<span class="w">    </span>observe:<span class="w"> </span>True
+start_positions:
+<span class="w">    </span>dist_type:<span class="w"> </span><span class="s2">&quot;surrounded_and_reflect&quot;</span>
+<span class="w">    </span>p:<span class="w"> </span><span class="m">0</span>.5
+<span class="w">    </span>map_x:<span class="w"> </span><span class="m">32</span>
+<span class="w">    </span>map_y:<span class="w"> </span><span class="m">32</span>
+
+<span class="c1"># enemy_mask:</span>
+<span class="c1">#   dist_type: &quot;mask&quot;</span>
+<span class="c1">#   mask_probability: 0.5</span>
+<span class="c1">#   n_enemies: 5</span>
+state_last_action:<span class="w"> </span>True
+state_timestep_number:<span class="w"> </span>False
+step_mul:<span class="w"> </span><span class="m">8</span>
+heuristic_ai:<span class="w"> </span>False
+<span class="c1"># heuristic_rest: False</span>
+debug:<span class="w"> </span>False
+</pre></div>
+</div>
+<p>训练时指定环境：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>smacv2<span class="w"> </span>--algo<span class="w"> </span>mappo<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+</section>
+</section>
+<section id="multi-agent-mujoco">
+<span id="mamujoco"></span><h2><span class="section-number">5.3. </span>Multi-Agent MuJoCo<a class="headerlink" href="#multi-agent-mujoco" title="Link to this heading"></a></h2>
+<img alt="../_images/mujoco.png" src="../_images/mujoco.png" />
+<p>MAMujoco 是一个支持多个智能体进行机器人控制的环境。
+是基于广为流行的单智能体机器人控制平台 Mujoco 为基础，提供了各种任务场景，包括人形机器人、蛇形机器人、四足行走机器人等多种任务场景。
+其中属于同一个机器人的多个智能体需要协作解决任务。</p>
+<p>官方链接: <a class="reference external" href="https://github.com/google-deepmind/mujoco">google-deepmind/mujoco</a></p>
+<section id="id13">
+<h3><span class="section-number">5.3.1. </span>环境特征<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>环境</p></th>
+<th class="head"><p>任务模式</p></th>
+<th class="head"><p>可观测性</p></th>
+<th class="head"><p>动作空间</p></th>
+<th class="head"><p>回报</p></th>
+<th class="head"><p>交互模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MAMujoco</p></td>
+<td><p>合作/协作</p></td>
+<td><p>部分可观测</p></td>
+<td><p>连续</p></td>
+<td><p>稠密</p></td>
+<td><p>同时</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id14">
+<h3><span class="section-number">5.3.2. </span>安装方法<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<section id="mujoco">
+<h4><span class="section-number">5.3.2.1. </span>安装 mujoco<a class="headerlink" href="#mujoco" title="Link to this heading"></a></h4>
+<p>mujoco 是 MAMujoco 所使用的物理引擎，现在可以直接使用 <cite>pip</cite> 进行安装。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>mujoco
+</pre></div>
+</div>
+</section>
+<section id="gymnasium-robotics">
+<h4><span class="section-number">5.3.2.2. </span>安装 gymnasium-robotics<a class="headerlink" href="#gymnasium-robotics" title="Link to this heading"></a></h4>
+<p>gymnasium-robotics 是管理多智能体强化学习的 API ，通过调用 gymnasium-robotics 的接口来使用 MAMujoco 。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>gymnasium-robotics<span class="o">==</span><span class="m">1</span>.2.3
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id15">
+<h3><span class="section-number">5.3.3. </span>使用方法<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<p>更改 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/mamujoco.yaml</span></code> 配置项：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scenario:<span class="w"> </span>HalfCheetah
+agent_conf:<span class="w"> </span>6x1
+agent_obsk:<span class="w"> </span><span class="m">1</span>
+<span class="c1"># render_mode: &quot;human&quot;</span>
+</pre></div>
+</div>
+<p>训练时指定环境：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>mamujoco<span class="w"> </span>--algo<span class="w"> </span>mappo<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pettingzoo-mpe">
+<span id="mpe"></span><h2><span class="section-number">5.4. </span>PettingZoo MPE<a class="headerlink" href="#pettingzoo-mpe" title="Link to this heading"></a></h2>
+<img alt="../_images/mpe.png" src="../_images/mpe.png" />
+<p>MPE(Multi-particle Environms) 是一个面相通信的环境，环境中的量子智能体可以移动，通信，相互观测，相互交互以及和地图中的固定地标交互。
+具有连续观察和离散动作空间，和一些基本的物理模拟。</p>
+<p>官方链接: <a class="reference external" href="https://github.com/openai/multiagent-particle-envs">openai/multiagent-particle-envs</a></p>
+<section id="id16">
+<h3><span class="section-number">5.4.1. </span>环境特征<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>环境</p></th>
+<th class="head"><p>任务模式</p></th>
+<th class="head"><p>可观测性</p></th>
+<th class="head"><p>动作空间</p></th>
+<th class="head"><p>回报</p></th>
+<th class="head"><p>交互模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pettingzoo_mpe</p></td>
+<td><p>合作/协作/竞争/混合</p></td>
+<td><p>全局可观测</p></td>
+<td><p>离散+连续</p></td>
+<td><p>稠密</p></td>
+<td><p>同时/异步</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id17">
+<h3><span class="section-number">5.4.2. </span>安装方法<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<section id="pettingzoo-1-24-1">
+<h4><span class="section-number">5.4.2.1. </span>安装 pettingzoo==1.24.1<a class="headerlink" href="#pettingzoo-1-24-1" title="Link to this heading"></a></h4>
+<p>mpe 环境现已经被集成到 pettingzoo 中，安装 pettingzoo 即可调用 mpe 环境。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="nv">pettingzoo</span><span class="o">==</span><span class="m">1</span>.24.1
+pip<span class="w"> </span>install<span class="w"> </span><span class="nv">supersuit</span><span class="o">==</span><span class="m">3</span>.9.0
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id18">
+<h3><span class="section-number">5.4.3. </span>使用方法<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<p>更改 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/pettingzoo_mpe.yaml</span></code> 配置项：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scenario:<span class="w"> </span>simple_spread_v3<span class="w"> </span><span class="c1"># choose from simple_spread_v3, simple_reference_v3, simple_speaker_listener_v4</span>
+continuous_actions:<span class="w"> </span>True
+</pre></div>
+</div>
+<p>训练时指定环境：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>pettingzoo_mpe<span class="w"> </span>--algo<span class="w"> </span>mappo<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+</section>
+</section>
+<section id="google-research-football">
+<span id="grf"></span><h2><span class="section-number">5.5. </span>Google Research Football<a class="headerlink" href="#google-research-football" title="Link to this heading"></a></h2>
+<img alt="../_images/football.png" src="../_images/football.png" />
+<p>Google Research Football 是基于开源游戏 Gameplay Football 的RL环境。
+其中智能体接受训练，在基于物理模拟的 3D 模拟器中踢足球。</p>
+<p>官方链接: <a class="reference external" href="https://github.com/google-research/football">google-research/football</a></p>
+<section id="id20">
+<h3><span class="section-number">5.5.1. </span>环境特征<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>环境</p></th>
+<th class="head"><p>任务模式</p></th>
+<th class="head"><p>可观测性</p></th>
+<th class="head"><p>动作空间</p></th>
+<th class="head"><p>回报</p></th>
+<th class="head"><p>交互模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Google Research Football</p></td>
+<td><p>合作/协作</p></td>
+<td><p>全局可观测</p></td>
+<td><p>离散</p></td>
+<td><p>稀疏</p></td>
+<td><p>同时</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id21">
+<h3><span class="section-number">5.5.2. </span>安装方法<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<section id="id22">
+<h4><span class="section-number">5.5.2.1. </span>安装 Google Research Football<a class="headerlink" href="#id22" title="Link to this heading"></a></h4>
+<p>Google Research Football 的安装需要依赖一些系统级别的依赖。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>cmake<span class="w"> </span>build-essential<span class="w"> </span>libgl1-mesa-dev<span class="w"> </span>libsdl2-dev<span class="w"> </span><span class="se">\</span>
+libsdl2-image-dev<span class="w"> </span>libsdl2-ttf-dev<span class="w"> </span>libsdl2-gfx-dev<span class="w"> </span>libboost-all-dev<span class="w"> </span><span class="se">\</span>
+libdirectfb-dev<span class="w"> </span>libst-dev<span class="w"> </span>mesa-utils<span class="w"> </span>xvfb<span class="w"> </span>x11vnc<span class="w"> </span>python3-pip
+</pre></div>
+</div>
+<p>在完成对系统级别的依赖进行安装之后，直接使用 <cite>pip</cite> 对 Google Research Football进行安装。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>gfootball
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id23">
+<h3><span class="section-number">5.5.3. </span>使用方法<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<p>更改 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/football.yaml</span></code> 配置项：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>env_name:<span class="w"> </span>academy_pass_and_shoot_with_keeper
+stacked:<span class="w"> </span>False
+representation:<span class="w"> </span>simple115v2
+rewards:<span class="w"> </span>scoring,checkpoints
+write_goal_dumps:<span class="w"> </span>False
+write_full_episode_dumps:<span class="w"> </span>False
+render:<span class="w"> </span>False
+write_video:<span class="w"> </span>False
+dump_frequency:<span class="w"> </span><span class="m">1</span>
+logdir:<span class="w"> </span>~
+extra_players:<span class="w"> </span>~
+number_of_left_players_agent_controls:<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="c1"># has to be consistent with the default setting below</span>
+number_of_right_players_agent_controls:<span class="w"> </span><span class="m">0</span>
+channel_dimensions:
+-<span class="w"> </span><span class="m">96</span>
+-<span class="w"> </span><span class="m">72</span>
+other_config_options:<span class="w"> </span>~
+<span class="c1"># env_num_agents (for REFERENCE):</span>
+<span class="c1">#   &quot;academy_pass_and_shoot_with_keeper&quot;: 2,</span>
+<span class="c1">#   &quot;academy_run_pass_and_shoot_with_keeper&quot;: 2,</span>
+<span class="c1">#   &quot;academy_3_vs_1_with_keeper&quot;: 3,</span>
+<span class="c1">#   &quot;academy_counterattack_easy&quot;: 4,</span>
+<span class="c1">#   &quot;academy_counterattack_hard&quot;: 4,</span>
+<span class="c1">#   &quot;academy_corner&quot;: 11,</span>
+<span class="c1">#   &quot;academy_single_goal_versus_lazy&quot;: 11</span>
+</pre></div>
+</div>
+<p>训练时指定环境：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>football<span class="w"> </span>--algo<span class="w"> </span>mappo<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+</section>
+</section>
+<section id="gym">
+<span id="id24"></span><h2><span class="section-number">5.6. </span>Gym<a class="headerlink" href="#gym" title="Link to this heading"></a></h2>
+<img alt="../_images/gym.png" src="../_images/gym.png" />
+<p>gym 是由 OPENAI 公司开发的集成了多种强化学习环境的泛用强化学习库，提供了一个简单且通用的接口来训练代理在各种环境中的表现。gym 包含了多种标准测试环境，使研究人员和开发者可以在相同的条件下测试和比较他们的算法。</p>
+<p>官方链接: <a class="reference external" href="https://www.gymlibrary.dev/content/basic_usage/">gymlibrary</a></p>
+<section id="id25">
+<h3><span class="section-number">5.6.1. </span>环境特征<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>环境</p></th>
+<th class="head"><p>任务模式</p></th>
+<th class="head"><p>可观测性</p></th>
+<th class="head"><p>动作空间</p></th>
+<th class="head"><p>回报</p></th>
+<th class="head"><p>交互模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>gym</p></td>
+<td><p>合作/协作/竞争</p></td>
+<td><p>全局可观测/部分可观测</p></td>
+<td><p>离散/连续</p></td>
+<td><p>稠密/稀疏</p></td>
+<td><p>同时</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id26">
+<h3><span class="section-number">5.6.2. </span>安装方法<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<section id="id27">
+<h4><span class="section-number">5.6.2.1. </span>安装 gym<a class="headerlink" href="#id27" title="Link to this heading"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>gym
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id28">
+<h3><span class="section-number">5.6.3. </span>使用方法<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
+<p>更改 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/gym.yaml</span></code> 配置项：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>scenario:<span class="w"> </span>Ant-v2<span class="w"> </span><span class="c1"># LunarLanderContinuous-v2, CarRacing-v0 选择具体的场景</span>
+</pre></div>
+</div>
+<p>训练时指定环境：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>gym<span class="w"> </span>--algo<span class="w"> </span>mappo<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+</section>
+</section>
+<section id="toy-example">
+<span id="toy"></span><h2><span class="section-number">5.7. </span>Toy Example<a class="headerlink" href="#toy-example" title="Link to this heading"></a></h2>
+<img alt="../_images/toy.png" src="../_images/toy.png" />
+<p>Toy Example 主要设计用于探索代理间的协作或对抗策略。环境具有一个简单的二元状态（0.0或1.0），代表两种不同的配置。每个代理都可以选择两种行动之一。环境的观察空间根据是否包含最后一次的状态和动作而变化，基础观察包括当前状态和代理标识。环境逻辑依赖于两个代理行动的一致性：如果一致，则状态转换并根据当前状态给予奖励；如果不一致，则状态保持不变。环境通过限定步数实现结束条件，提供重置和种子设定功能以支持实验的可复现性。这个环境非常适合用来开发和测试多智能体系统的交互策略，通过调整观察空间的复杂度来适应不同的学习需求和挑战。</p>
+<section id="id29">
+<h3><span class="section-number">5.7.1. </span>环境特征<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>环境</p></th>
+<th class="head"><p>任务模式</p></th>
+<th class="head"><p>可观测性</p></th>
+<th class="head"><p>动作空间</p></th>
+<th class="head"><p>回报</p></th>
+<th class="head"><p>交互模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>toy</p></td>
+<td><p>合作</p></td>
+<td><p>全局可观测</p></td>
+<td><p>离散</p></td>
+<td><p>稠密</p></td>
+<td><p>同时</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id30">
+<h3><span class="section-number">5.7.2. </span>安装方法<a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
+<p>toy 内置在 AMB 代码中，不需要通过 pip 下载额外的依赖。</p>
+</section>
+<section id="id31">
+<h3><span class="section-number">5.7.3. </span>使用方法<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<p>更改 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/toy.yaml</span></code> 配置项：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>obs_last_state:<span class="w"> </span>True
+obs_last_action:<span class="w"> </span>True
+</pre></div>
+</div>
+<p>训练时指定环境：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>toy<span class="w"> </span>--algo<span class="w"> </span>mappo<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+</section>
+</section>
+<section id="bi-dexhands">
+<span id="id32"></span><h2><span class="section-number">5.8. </span>Bi-DexHands<a class="headerlink" href="#bi-dexhands" title="Link to this heading"></a></h2>
+<img alt="../_images/bi-dexhands.gif" src="../_images/bi-dexhands.gif" />
+<p>Bi-DexHands（<a class="reference external" href="https://bi-dexhands.ai/">bi-dexhands.ai</a>）是基于Issac Gym构建的模拟人类灵巧双手操作的任务集合（例如移交、举起、投掷、放置等）。</p>
+<p>相关链接: <a class="reference external" href="https://github.com/PKU-MARL/DexterousHands">PKU-MARL/DexterousHands</a>, <a class="reference external" href="https://bi-dexhands.ai/">bi-dexhands.ai</a></p>
+<section id="id34">
+<h3><span class="section-number">5.8.1. </span>环境特征<a class="headerlink" href="#id34" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>环境</p></th>
+<th class="head"><p>任务模式</p></th>
+<th class="head"><p>可观测性</p></th>
+<th class="head"><p>动作空间</p></th>
+<th class="head"><p>回报</p></th>
+<th class="head"><p>交互模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>dexhands</p></td>
+<td><p>合作</p></td>
+<td><p>部分可观测</p></td>
+<td><p>连续</p></td>
+<td><p>-</p></td>
+<td><p>同时</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id35">
+<h3><span class="section-number">5.8.2. </span>安装方法<a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>首先正确安装IsaacGym，有关IsaacGym安装的详细信息可以在 <a class="reference external" href="https://developer.nvidia.com/isaac-gym">Isaac Gym</a> 找到。</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>isaacgym/python
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>正确安装Vulkan SDK，有关Vulkan驱动的详细信息可以在 <a class="reference external" href="https://vulkan.lunarg.com/sdk/home">Vulkan</a> 找到。</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>-qO-<span class="w"> </span>https://packages.lunarg.com/lunarg-signing-key-pub.asc<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/trusted.gpg.d/lunarg.asc
+sudo<span class="w"> </span>wget<span class="w"> </span>-qO<span class="w"> </span>/etc/apt/sources.list.d/lunarg-vulkan-1.3.275-jammy.list<span class="w"> </span>https://packages.lunarg.com/vulkan/1.3.275/lunarg-vulkan-1.3.275-jammy.list
+sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>vulkan-sdk
+</pre></div>
+</div>
+</section>
+<section id="id36">
+<h3><span class="section-number">5.8.3. </span>使用方法<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<p>更改 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/dexhands.yaml</span></code> 配置项：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">task</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ShadowHandCatchOver2Underarm</span>
+<span class="nt">hands_episode_length</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">75</span>
+</pre></div>
+</div>
+<p>训练时指定环境：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>dexhands<span class="w"> </span>--algo<span class="w"> </span>mappo<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+</section>
+</section>
+<section id="quadrotor-swarms">
+<span id="quads"></span><h2><span class="section-number">5.9. </span>Quadrotor Swarms<a class="headerlink" href="#quadrotor-swarms" title="Link to this heading"></a></h2>
+<style>
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .column {
+        flex: 50%;
+        max-width: 50%;
+        padding: 0 4px;
+    }
+
+    .column img {
+        margin-top: 8px;
+        vertical-align: middle;
+        width: 100%;
+    }
+</style><div class="row">
+    <div class="column">
+        <img src="../_static/images/env/quads1.gif" alt="Image 1">
+    </div>
+    <div class="column">
+        <img src="../_static/images/env/quads2.gif" alt="Image 2">
+    </div>
+</div>
+<div class="row">
+     <div class="column">
+        <img src="../_static/images/env/quads3.gif" alt="Image 3">
+     </div>
+     <div class="column">
+        <img src="../_static/images/env/quads4.gif" alt="Image 4">
+     </div>
+ </div>
+ <br><p>Quadrotor Swarms 是从 <a class="reference external" href="https://github.com/amolchanov86/gym_art">gym_art</a> 延伸出来的飞行动力学模拟器，扩展到支持四旋翼无人机群的模拟任务。</p>
+<p>相关链接: <a class="reference external" href="https://github.com/Zhehui-Huang/quad-swarm-rl/">Zhehui-Huang/quad-swarm-rl</a></p>
+<section id="id37">
+<h3><span class="section-number">5.9.1. </span>环境特征<a class="headerlink" href="#id37" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>环境</p></th>
+<th class="head"><p>任务模式</p></th>
+<th class="head"><p>可观测性</p></th>
+<th class="head"><p>动作空间</p></th>
+<th class="head"><p>回报</p></th>
+<th class="head"><p>交互模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>quads</p></td>
+<td><p>合作</p></td>
+<td><p>部分可观测</p></td>
+<td><p>连续</p></td>
+<td><p>-</p></td>
+<td><p>同时</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id38">
+<h3><span class="section-number">5.9.2. </span>安装方法<a class="headerlink" href="#id38" title="Link to this heading"></a></h3>
+<p>已在源码中集成，无需额外安装。</p>
+</section>
+<section id="id39">
+<h3><span class="section-number">5.9.3. </span>使用方法<a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
+<p>更改 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/quads.yaml</span></code> 配置项：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">quadrotor_multi</span>
+<span class="nt">conf</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">quads_use_numba</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">    </span><span class="nt">quads_num_agents</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="w">    </span><span class="nt">quads_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">static_same_goal</span>
+<span class="w">    </span><span class="nt">quads_episode_duration</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15.0</span>
+<span class="w">    </span><span class="nt">quads_neighbor_encoder_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no_encoder</span>
+<span class="w">    </span><span class="nt">quads_neighbor_hidden_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">    </span><span class="nt">quads_neighbor_obs_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">none</span>
+<span class="w">    </span><span class="nt">quads_neighbor_visible_num</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">    </span><span class="nt">replay_buffer_sample_prob</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.75</span>
+<span class="w">    </span><span class="nt">quads_obs_repr</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">xyz_vxyz_R_omega</span>
+<span class="w">    </span><span class="nt">quads_collision_hitbox_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2.0</span>
+<span class="w">    </span><span class="nt">quads_collision_falloff_radius</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">quads_use_obstacles</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">    </span><span class="nt">quads_obst_density</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span>
+<span class="w">    </span><span class="nt">quads_obst_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="nt">quads_obst_spawn_area</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">6.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">6.0</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">quads_use_downwash</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">    </span><span class="nt">quads_room_dims</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">10.</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">10.</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">quads_view_mode</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;topdown&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;chase&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;global&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">quads_render</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">    </span><span class="nt">quads_domain_random</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">    </span><span class="nt">quads_obst_density_random</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">    </span><span class="nt">quads_obst_size_random</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">    </span><span class="nt">quads_obst_density_min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<span class="w">    </span><span class="nt">quads_obst_density_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span>
+<span class="w">    </span><span class="nt">quads_obst_size_min</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.3</span>
+<span class="w">    </span><span class="nt">quads_obst_size_max</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.6</span>
+<span class="w">    </span><span class="nt">quads_collision_reward</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">quads_collision_smooth_max_penalty</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10.0</span>
+<span class="w">    </span><span class="nt">quads_obst_collision_reward</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">anneal_collision_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.0</span>
+<span class="w">    </span><span class="nt">with_pbt</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="w">    </span><span class="nt">visualize_v_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+</pre></div>
+</div>
+<p>训练时指定环境：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>quads<span class="w"> </span>--algo<span class="w"> </span>mappo<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+</section>
+</section>
+<section id="network-system-control">
+<span id="network"></span><h2><span class="section-number">5.10. </span>Network System Control<a class="headerlink" href="#network-system-control" title="Link to this heading"></a></h2>
+<img alt="../_images/network.png" src="../_images/network.png" />
+<p>Network System Control网络系统控制环境是一个模拟交通信号控制的多智能体强化学习环境。在这个环境中，智能体需要通过控制交通信号来优化交通流量。可用的四个场景分别是：</p>
+<ul class="simple">
+<li><p>ATSC Grid：合成交通网格中的自适应交通信号控制。</p></li>
+<li><p>ATSC Monaco：摩纳哥市真实交通网络中的自适应交通信号控制。</p></li>
+<li><p>CACC Catch-up：协作自适应巡航控制，用于追赶领先车辆。</p></li>
+<li><p>CACC Slow-down：协作自适应巡航控制，用于跟随领先车辆减速。</p></li>
+</ul>
+<p>相关链接: <a class="reference external" href="https://github.com/cts198859/deeprl_network">cts198859/deeprl_network</a></p>
+<section id="id40">
+<h3><span class="section-number">5.10.1. </span>环境特征<a class="headerlink" href="#id40" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>环境</p></th>
+<th class="head"><p>任务模式</p></th>
+<th class="head"><p>可观测性</p></th>
+<th class="head"><p>动作空间</p></th>
+<th class="head"><p>回报</p></th>
+<th class="head"><p>交互模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>network</p></td>
+<td><p>合作</p></td>
+<td><p>部分可观测</p></td>
+<td><p>离散</p></td>
+<td><p>-</p></td>
+<td><p>同时</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id41">
+<h3><span class="section-number">5.10.2. </span>安装依赖<a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>eclipse-sumo<span class="w"> </span>sumolib<span class="w"> </span>traci<span class="w"> </span>seaborn<span class="w"> </span>ipdb
+</pre></div>
+</div>
+</section>
+<section id="id42">
+<h3><span class="section-number">5.10.3. </span>使用方法<a class="headerlink" href="#id42" title="Link to this heading"></a></h3>
+<p>更改 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/network.yaml</span></code> 配置项：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">scenario</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">large_grid</span>
+<span class="nt">network_cfg</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">config_ma2c_nc_grid.ini</span>
+<span class="nt">output_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">results/network_data</span><span class="w"> </span><span class="c1"># from root of repo</span>
+</pre></div>
+</div>
+<p>训练时指定环境：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>network<span class="w"> </span>--algo<span class="w"> </span>mappo<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+</section>
+</section>
+<section id="voltage-control">
+<span id="voltage"></span><h2><span class="section-number">5.11. </span>Voltage Control<a class="headerlink" href="#voltage-control" title="Link to this heading"></a></h2>
+<img alt="../_images/voltage.png" src="../_images/voltage.png" />
+<p>Active Voltage Control on Power Distribution Networks (MAPDN)是电力分布网络上分布式/分散式有源电压控制的环境，也是可用于批量的状态最先进的多智能体Actor-Critic算法的训练。环境的实现遵循PyMARL中提供的多智能体环境框架。</p>
+<p>相关链接: <a class="reference external" href="https://github.com/Future-Power-Networks/MAPDN">Future-Power-Networks/MAPDN</a></p>
+<section id="id43">
+<h3><span class="section-number">5.11.1. </span>环境特征<a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+<col style="width: 16.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>环境</p></th>
+<th class="head"><p>任务模式</p></th>
+<th class="head"><p>可观测性</p></th>
+<th class="head"><p>动作空间</p></th>
+<th class="head"><p>回报</p></th>
+<th class="head"><p>交互模式</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>voltage</p></td>
+<td><p>合作</p></td>
+<td><p>部分可观测</p></td>
+<td><p>离散</p></td>
+<td><p>-</p></td>
+<td><p>同时</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="id44">
+<h3><span class="section-number">5.11.2. </span>安装依赖<a class="headerlink" href="#id44" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pandapower
+</pre></div>
+</div>
+</section>
+<section id="id45">
+<h3><span class="section-number">5.11.3. </span>使用方法<a class="headerlink" href="#id45" title="Link to this heading"></a></h3>
+<p>更改 <code class="docutils literal notranslate"><span class="pre">amb/configs/env_cfgs/voltage.yaml</span></code> 配置项：</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;voltage_control&quot;</span>
+
+<span class="nt">env_args</span><span class="p">:</span>
+<span class="w">    </span><span class="s">&quot;voltage_barrier_type&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;l1&quot;</span><span class="w"> </span><span class="c1"># &quot;l1&quot;, &quot;l2&quot;, &quot;bowl&quot;, &quot;courant_beltrami&quot;, &quot;bump&quot;</span>
+<span class="w">    </span><span class="s">&quot;voltage_weight&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="s">&quot;q_weight&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<span class="w">    </span><span class="s">&quot;line_weight&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="w">    </span><span class="s">&quot;dq_dv_weight&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">null</span>
+<span class="w">    </span><span class="s">&quot;history&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<span class="w">    </span><span class="s">&quot;pv_scale&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="s">&quot;demand_scale&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0</span>
+<span class="w">    </span><span class="s">&quot;state_space&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;pv&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;demand&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;reactive&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;vm_pu&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;va_degree&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="s">&quot;v_upper&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.05</span>
+<span class="w">    </span><span class="s">&quot;v_lower&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.95</span>
+<span class="w">    </span><span class="s">&quot;data_path&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="s">&quot;data/case33_3min_final&quot;</span><span class="w"> </span><span class="c1"># from the root of valtage_control environment folder</span>
+<span class="w">    </span><span class="s">&quot;episode_limit&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">240</span><span class="w"> </span><span class="c1"># in time intervals</span>
+<span class="w">    </span><span class="s">&quot;action_scale&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.8</span>
+<span class="w">    </span><span class="s">&quot;action_bias&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">    </span><span class="s">&quot;mode&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">distributed</span><span class="w"> </span><span class="c1"># distributed / decentralised</span>
+<span class="w">    </span><span class="s">&quot;reset_action&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="w">    </span><span class="s">&quot;seed&quot;</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+</pre></div>
+</div>
+<p>训练时指定环境：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>voltage<span class="w"> </span>--algo<span class="w"> </span>mappo<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="quickstart.html" class="btn btn-neutral float-left" title="4. 快速开始" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="algorithm.html" class="btn btn-neutral float-right" title="6. 多智能体强化学习算法介绍" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, BUAA NLSDE。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7. 对抗攻击算法介绍 &mdash; AMB v1.0.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=12f31cd9"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="prev" title="6. 多智能体强化学习算法介绍" href="algorithm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AMB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">文档目录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. 平台简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#id4">2. 项目成员</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">3. 项目架构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">4. 快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">5. 环境介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithm.html">6. 多智能体强化学习算法介绍</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">7. 对抗攻击算法介绍</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id3">7.1. 基于观测空间的对抗扰动攻击</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#randomnoise">7.1.1. 随机噪声攻击</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#iterativeperturbation">7.1.2. 最优动作抑制的扰动攻击</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#adaptiveaction">7.1.3. 自适应动作的扰动攻击</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">7.2. 基于少数控制的对抗诱导攻击</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#randompolicy">7.2.1. 随机策略攻击</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#traitor">7.2.2. 零和博弈策略攻击</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">7.2.2.1. 单内鬼攻击</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">7.2.2.2. 多内鬼攻击</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#dual">7.3. 基于群体对战的对抗策略攻击</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AMB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">7. </span>对抗攻击算法介绍</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/handbook/adversarial.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">7. </span>对抗攻击算法介绍<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>基于强化学习其独有的马尔可夫过程的学习范式，对强化学习的攻击大致可分为基于状态 <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> 、基于奖励 <span class="math notranslate nohighlight">\(R\)</span> 以及基于动作 <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> 的三种攻击方式 <span id="id2">[<a class="reference internal" href="#id18" title="刘艾杉, 郭骏, 李思民, 肖宜松, 刘祥龙, and 陶大程. 面向深度强化学习的对抗攻防综述. 计算机学报, August 2023. doi:10.11897/SP.J.1016.2023.01553.">1</a>]</span> 。其中，基于状态 <span class="math notranslate nohighlight">\(\mathcal{S}\)</span> 的攻击通过扰动智能体观测或者改变智能体观测结果，从而诱使智能体做出最小化目标函数的决策；基于奖励 <span class="math notranslate nohighlight">\(R\)</span> 的攻击通过微小地扰动智能体训练过程中的奖励函数，从而影响智能体的全局策略；基于动作 <span class="math notranslate nohighlight">\(\mathcal{A}\)</span> 的攻击直接对智能体的动作进行微小扰动，从而大幅影响智能体的目标函数，或通过训练具有对抗策略的智能体从而影响其他智能体决策。</p>
+<section id="id3">
+<h2><span class="section-number">7.1. </span>基于观测空间的对抗扰动攻击<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>基于状态的攻击（如图 <a class="reference internal" href="#figure-attack-state"><span class="std std-ref">基于状态的对抗攻击算法示意图</span></a> 所示）可分为两类：基于观测的对抗攻击与基于环境的对抗攻击。其中，基于观测的对抗攻击主要通过扰动智能体的观测值 <span class="math notranslate nohighlight">\(s\)</span> ，从而改变智能体策略 <span class="math notranslate nohighlight">\(\pi(s) = p(s|a)\)</span> 来实现攻击 <span id="id4">[<a class="reference internal" href="#id19" title="Vahid Behzadan and Arslan Munir. Vulnerability of Deep Reinforcement Learning to Policy Induction Attacks. In Petra Perner, editor, International Conference on Machine Learning and Data Mining in Pattern Recognition, Lecture Notes in Computer Science, 262–275. Cham, 2017. Springer International Publishing. doi:10.1007/978-3-319-62416-7_19.">2</a>, <a class="reference internal" href="#id20" title="Sandy Huang, Nicolas Papernot, Ian Goodfellow, Yan Duan, and Pieter Abbeel. Adversarial Attacks on Neural Network Policies. February 2017. arXiv:1702.02284, doi:10.48550/arXiv.1702.02284.">3</a>]</span> ；基于环境的对抗攻击在环境中添加对智能体观测值 <span class="math notranslate nohighlight">\(s\)</span> 的扰动的同时，还要求此扰动符合状态转移方程 <span class="math notranslate nohighlight">\(\mathcal{T}=p\left(s^{\prime}, r \mid s, a\right)\)</span> 。</p>
+<figure class="align-center" id="id23">
+<span id="figure-attack-state"></span><a class="reference internal image-reference" href="../_images/attack_state.png"><img alt="../_images/attack_state.png" src="../_images/attack_state.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-text">基于状态的对抗攻击算法示意图</span><a class="headerlink" href="#id23" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="randomnoise">
+<span id="id5"></span><h3><span class="section-number">7.1.1. </span>随机噪声攻击<a class="headerlink" href="#randomnoise" title="Link to this heading"></a></h3>
+<p>Huang 等人 <span id="id6">[<a class="reference internal" href="#id20" title="Sandy Huang, Nicolas Papernot, Ian Goodfellow, Yan Duan, and Pieter Abbeel. Adversarial Attacks on Neural Network Policies. February 2017. arXiv:1702.02284, doi:10.48550/arXiv.1702.02284.">3</a>]</span> 最先对通过深度强化学习得到的策略进行攻击, 使用机器学习领域常用的快速梯度符号 (Fast gradient sign method, FGSM) <span id="id7">[<a class="reference internal" href="#id21" title="Ian J. Goodfellow, Jonathon Shlens, and Christian Szegedy. Explaining and Harnessing Adversarial Examples. March 2015. arXiv:1412.6572, doi:10.48550/arXiv.1412.6572.">4</a>]</span> 算法制造对抗扰动并将扰动直接添加到智能体的观测值上, 以此对深度学习智能体进行攻击。这项工作首次尝试并验证了由 DQN、TRPO 以及 A3C 这些算法得到的智能体容易受到对抗性扰动的攻击, 且对抗样本在不同强化学习算法得到的模型之间、在相同算法下得到的不同模型之间具有较好的迁移性。</p>
+<p><strong>基本原理</strong></p>
+<p>通过通过在输入图像上加入扰动（如图 <a class="reference internal" href="#figure-fgsm"><span class="std std-ref">基于 FGSM 方法生成对抗样本</span></a> 中间部分放大后的对抗噪声扰动所示）对智能体的输入空间观测进行攻击，从而迷惑智能体决策动作（图片下方框为当前动作决策分布）。</p>
+<figure class="align-center" id="id24">
+<span id="figure-fgsm"></span><a class="reference internal image-reference" href="../_images/fgsm.png"><img alt="../_images/fgsm.png" src="../_images/fgsm.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">基于 FGSM 方法生成对抗样本</span><a class="headerlink" href="#id24" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>形式化定义</strong></p>
+<p>扰动智能体观测的对抗样本的目标为：对于智能体状态 <span class="math notranslate nohighlight">\(s\)</span> ，给定一系列允许的扰动 <span class="math notranslate nohighlight">\(B(s)\)</span> ，令 <span class="math notranslate nohighlight">\(\nu(s) \in B(s)\)</span> 扰动后的智能体观测状态，使得强化学习达成的目标 <span class="math notranslate nohighlight">\(G\)</span> 最小：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\min _{\theta} G_{t} &amp; =\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1},\\
+\text{where} &amp; \quad \nu_{\theta}(s) \in B(s), s^{\prime} \sim \mathcal{T}(s, a), a \sim \pi(\nu(s))\end{split}\]</div>
+<p>其中， <span class="math notranslate nohighlight">\(\theta\)</span> 为 <span class="math notranslate nohighlight">\(\nu(s)\)</span> 的参数。通过生成添加在状态 <span class="math notranslate nohighlight">\(s\)</span> 上，且在允许扰动 <span class="math notranslate nohighlight">\(B(s)\)</span> 范围内的噪声，攻击者的目标是最小化被攻击者的总奖励函数。</p>
+<p><strong>随机高斯噪声攻击模块</strong></p>
+<figure class="align-center" id="id25">
+<a class="reference internal image-reference" href="../_images/random.svg"><img alt="../_images/random.svg" src="../_images/random.svg" width="80%" /></a>
+<figcaption>
+<p><span class="caption-text">随机高斯噪声攻击模块</span><a class="headerlink" href="#id25" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>配置项</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Unmodifiable configuration items</span>
+<span class="nt">num_env_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span><span class="w"> </span><span class="c1"># No training required, just perturb the observation</span>
+<span class="nt">perturb_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="nt">adaptive_alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="nt">targeted_attack</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+
+<span class="c1"># Modifiable configuration items</span>
+<span class="c1"># the id of adversarial agents</span>
+<span class="nt">adv_agent_ids</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]</span>
+<span class="c1"># the range of timestep that can be perturbed, e.g.: &quot;1-10,15,20&quot;</span>
+<span class="nt">perturb_timesteps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~</span>
+<span class="c1"># perturbation parameters</span>
+<span class="c1"># the budget of perturbation (in L-inf norm)</span>
+<span class="nt">perturb_epsilon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span>
+<span class="c1"># if adaptive_alpha=False, the budget of perturbation in every iteration</span>
+<span class="nt">perturb_alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<span class="c1"># the criterion function when calculating the distance of actions</span>
+<span class="nt">criterion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+</pre></div>
+</div>
+<p><strong>使用方法</strong></p>
+<p>先训练victim智能体</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+<p>再训练adversary智能体，执行攻击</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;perturbation_algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>perturbation<span class="w"> </span>--victim<span class="w"> </span>&lt;victim_algo_name&gt;<span class="w"> </span>--victim.model_dir<span class="w"> </span>&lt;dir/to/your/model&gt;
+</pre></div>
+</div>
+</section>
+<section id="iterativeperturbation">
+<span id="id8"></span><h3><span class="section-number">7.1.2. </span>最优动作抑制的扰动攻击<a class="headerlink" href="#iterativeperturbation" title="Link to this heading"></a></h3>
+<p>这是一种基于状态的攻击算法，首先在多智能体系统中，选择一个或多个智能体作为攻击者（adversary），其他为在受害者（victim），通过在受害者的观测上添加基于梯度的多次迭代对抗扰动，生成的对抗性观测，作为攻击者的观测，从而影响攻击者的策略，使其做出最小化受害者目标函数的决策。</p>
+<figure class="align-center" id="id26">
+<a class="reference internal image-reference" href="../_images/iterative_perturbation.png"><img alt="../_images/iterative_perturbation.png" src="../_images/iterative_perturbation.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-text">最优动作抑制的扰动攻击示意图</span><a class="headerlink" href="#id26" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>IGS攻击模块</strong></p>
+<figure class="align-center" id="id27">
+<a class="reference internal image-reference" href="../_images/igs.svg"><img alt="../_images/igs.svg" src="../_images/igs.svg" width="80%" /></a>
+<figcaption>
+<p><span class="caption-text">IGS攻击模块</span><a class="headerlink" href="#id27" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>如上图所示，IGS攻击模块的输入是victim的 <code class="docutils literal notranslate"><span class="pre">obs</span></code> ，输出是扰动过后的 <code class="docutils literal notranslate"><span class="pre">obs_adv</span></code> ，然后 <code class="docutils literal notranslate"><span class="pre">obs_adv</span></code> 再作为adversary的 <code class="docutils literal notranslate"><span class="pre">obs</span></code> ，从而影响adversary的策略。攻击的流程如下：</p>
+<ol class="arabic simple">
+<li><p>先对obs添加一个随机高斯噪声，控制在 <span class="math notranslate nohighlight">\(\epsilon\)</span> 范围内。</p></li>
+<li><p>遍历 <code class="docutils literal notranslate"><span class="pre">num_iters</span></code> 次迭代，执行梯度攻击。</p></li>
+<li><p>在每次迭代中，可以按照是否传入 <code class="docutils literal notranslate"><span class="pre">target_action</span></code> 来选择进行无目标攻击还是有目标攻击。</p></li>
+<li><p>最终输出扰动后的 <code class="docutils literal notranslate"><span class="pre">obs_adv</span></code> 。</p></li>
+</ol>
+<p><strong>训练Pipeline</strong></p>
+<figure class="align-center" id="id28">
+<a class="reference internal image-reference" href="../_images/igs_pipeline.svg"><img alt="../_images/igs_pipeline.svg" src="../_images/igs_pipeline.svg" width="40%" /></a>
+<figcaption>
+<p><span class="caption-text">Perturbation-based Attack Pipeline</span><a class="headerlink" href="#id28" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>配置项</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># adversarial policy parameters</span>
+<span class="c1"># the id of adversarial agents</span>
+<span class="nt">adv_agent_ids</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]</span>
+<span class="c1"># the range of timestep that can be perturbed, e.g.: &quot;1-10,15,20&quot;</span>
+<span class="nt">perturb_timesteps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~</span>
+<span class="c1"># perturbation parameters</span>
+<span class="c1"># the budget of perturbation (in L-inf norm)</span>
+<span class="nt">perturb_epsilon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span>
+<span class="c1"># the iterations of gradient backwards for perturbations</span>
+<span class="nt">perturb_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="c1"># adaptively calculate the proper alpha</span>
+<span class="nt">adaptive_alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="c1"># if adaptive_alpha=False, the budget of perturbation in every iteration</span>
+<span class="nt">perturb_alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<span class="c1"># the criterion function when calculating the distance of actions</span>
+<span class="nt">criterion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<span class="c1"># if targeted, load the adversarial policies and perform targeted attack</span>
+<span class="nt">targeted_attack</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
+<span class="c1"># No training required, just perturb the observation</span>
+<span class="nt">num_env_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+</pre></div>
+</div>
+<p><strong>使用方法</strong></p>
+<p>先训练victim智能体</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+<p>再训练adversary智能体，执行攻击</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;perturbation_algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>perturbation<span class="w"> </span>--victim<span class="w"> </span>&lt;victim_algo_name&gt;<span class="w"> </span>--victim.model_dir<span class="w"> </span>&lt;dir/to/your/model&gt;
+</pre></div>
+</div>
+</section>
+<section id="adaptiveaction">
+<span id="id9"></span><h3><span class="section-number">7.1.3. </span>自适应动作的扰动攻击<a class="headerlink" href="#adaptiveaction" title="Link to this heading"></a></h3>
+<p>针对上述最优动作抑制迭代扰动攻击的不足，自适应动作目标迭代扰动攻击算法使用额外的强化学习算法建模动作和全局回报的关系，将攻击目标从每步最优动作调整为全局最大回报。具体而言，自适应动作目标迭代扰动攻击引入一个额外的策略网络 <span class="math notranslate nohighlight">\(\boldsymbol{\pi}^b(\boldsymbol{b}^b|\boldsymbol{o}_k^\alpha)\)</span> ，其目标是最小化被攻击者的全局回报 <span class="math notranslate nohighlight">\(G\)</span> 。该策略可以使用时间差分或策略梯度算法进行训练，被攻击的智能体以 <span class="math notranslate nohighlight">\(\boldsymbol{a}^b\)</span> 为目标，对其局部观测进行 <span class="math notranslate nohighlight">\(k\)</span> 次PGD迭代扰动后，所输出的动作 <span class="math notranslate nohighlight">\(\boldsymbol{a}_{t,k}^\alpha\)</span> 对整体智能体来说是最差动作，即其单步奖励为 <span class="math notranslate nohighlight">\(-R(s_t, \boldsymbol{a}_{t,k}^\alpha, \boldsymbol{a}_t^{\nu})\)</span> ，并以此为目标即可实现最小化被攻击者的全局回报，如下图所示。</p>
+<figure class="align-center" id="id29">
+<a class="reference internal image-reference" href="../_images/adaptive_action.png"><img alt="../_images/adaptive_action.png" src="../_images/adaptive_action.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-text">自适应动作的扰动攻击示意图</span><a class="headerlink" href="#id29" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>配置项</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># adversarial policy parameters</span>
+<span class="c1"># the id of adversarial agents</span>
+<span class="nt">adv_agent_ids</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]</span>
+<span class="c1"># the range of timestep that can be perturbed, e.g.: &quot;1-10,15,20&quot;</span>
+<span class="nt">perturb_timesteps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~</span>
+<span class="c1"># perturbation parameters</span>
+<span class="c1"># the budget of perturbation (in L-inf norm)</span>
+<span class="nt">perturb_epsilon</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span>
+<span class="c1"># the iterations of gradient backwards for perturbations</span>
+<span class="nt">perturb_iters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">10</span>
+<span class="c1"># adaptively calculate the proper alpha</span>
+<span class="nt">adaptive_alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="c1"># if adaptive_alpha=False, the budget of perturbation in every iteration</span>
+<span class="nt">perturb_alpha</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.05</span>
+<span class="c1"># the criterion function when calculating the distance of actions</span>
+<span class="nt">criterion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">default</span>
+<span class="c1"># if targeted, load the adversarial policies and perform targeted attack</span>
+<span class="nt">targeted_attack</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
+<span class="c1"># Training required</span>
+<span class="nt">num_env_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5000000</span>
+</pre></div>
+</div>
+<p><strong>使用方法</strong></p>
+<p>先训练victim智能体</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+<p>再训练adversary智能体，执行攻击</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;perturbation_algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>perturbation<span class="w"> </span>--victim<span class="w"> </span>&lt;victim_algo_name&gt;<span class="w"> </span>--victim.model_dir<span class="w"> </span>&lt;dir/to/your/model&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id10">
+<h2><span class="section-number">7.2. </span>基于少数控制的对抗诱导攻击<a class="headerlink" href="#id10" title="Link to this heading"></a></h2>
+<p>对于动作进行攻击的对抗样本由允许对于智能体策略 <span class="math notranslate nohighlight">\(\pi(\cdot | s)\)</span> 产生扰动的集合 <span class="math notranslate nohighlight">\(B(\pi)\)</span> 定义。令 <span class="math notranslate nohighlight">\(\nu(\pi) \in B(\pi)\)</span> 表示对于智能体策略的扰动，则此问题可被形式化为</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\min _{\theta} G_{t} &amp; =\sum_{k=0}^{\infty} \gamma^{k} R_{t+k+1},\\
+\text{where} &amp; \quad s' \sim \mathcal{T}(s,a), a \sim \nu_\theta(\pi(\cdot | s))\end{split}\]</div>
+<p>其中，攻击者 <span class="math notranslate nohighlight">\(\nu\)</span> 直接修改攻击者做出的动作概率 <span class="math notranslate nohighlight">\(\pi_\theta^\nu(\cdot | s)\)</span> ，其攻击目标为最小化被攻击者的总奖励函数。</p>
+<p>一系列研究工作尝试训练出一个具有对抗策略（Adversarial Policy）的强化学习智能体。具备这种对抗策略强的智能体将会做出具有对抗攻击性的行为，迫使另一方智能体观测后作出错误的行为。Gleave等人 <span id="id11">[<a class="reference internal" href="#id22" title="Adam Gleave, Michael Dennis, Cody Wild, Neel Kant, Sergey Levine, and Stuart Russell. Adversarial Policies: Attacking Deep Reinforcement Learning. January 2021. arXiv:1905.10615, doi:10.48550/arXiv.1905.10615.">5</a>]</span> 第一次创造性地提出了对抗性策略的概念。通过对抗性策略在共享环境中采取的行动将诱导另一方智能体产生错误的预测和行为该论文在MuJoCo 的四个环境上进行了验证，证明了零和博弈中对抗策略的存在和有效性，如图 <a class="reference internal" href="#figure-adv-policy"><span class="std std-ref">对抗性策略示意图</span></a> 所示。</p>
+<figure class="align-center" id="id30">
+<span id="figure-adv-policy"></span><a class="reference internal image-reference" href="../_images/adv_policy.png"><img alt="../_images/adv_policy.png" src="../_images/adv_policy.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">对抗性策略示意图</span><a class="headerlink" href="#id30" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<section id="randompolicy">
+<span id="id12"></span><h3><span class="section-number">7.2.1. </span>随机策略攻击<a class="headerlink" href="#randompolicy" title="Link to this heading"></a></h3>
+<p>随机策略替换攻击是基于少数控制的对抗诱导攻击理论延伸出的一种最基础的攻击方式，其核心思想是在不变动其他智能体策略的情况下，将被攻击智能体的策略直接替换为随机策略，即对被攻击智能体的策略网络参数进行随机初始化，从而影响智能体系统的全局回报。</p>
+<p><strong>配置项</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># adversarial policy parameters</span>
+<span class="c1"># the id of adversarial agents</span>
+<span class="nt">adv_agent_ids</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]</span>
+<span class="c1"># No training required</span>
+<span class="nt">num_env_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+</pre></div>
+</div>
+<p><strong>使用方法</strong></p>
+<p>先训练victim智能体</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+<p>再训练adversary智能体，执行攻击</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;taitor_algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>taitor<span class="w"> </span>--victim<span class="w"> </span>&lt;victim_algo_name&gt;<span class="w"> </span>--victim.model_dir<span class="w"> </span>&lt;dir/to/your/model&gt;
+</pre></div>
+</div>
+</section>
+<section id="traitor">
+<span id="id13"></span><h3><span class="section-number">7.2.2. </span>零和博弈策略攻击<a class="headerlink" href="#traitor" title="Link to this heading"></a></h3>
+<p>本项目中的内鬼攻击是通过在多智能体系统中选定一个或多个智能体作为内鬼（或对手），训练对手的策略，让其做出降低整体奖励的动作，从而影响其他智能体的策略，使其做出最小化目标函数的决策。</p>
+<figure class="align-center" id="id31">
+<a class="reference internal image-reference" href="../_images/traitor.png"><img alt="../_images/traitor.png" src="../_images/traitor.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-text">零和博弈策略攻击示意图</span><a class="headerlink" href="#id31" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>训练Pipeline</strong></p>
+<figure class="align-center" id="id32">
+<a class="reference internal image-reference" href="../_images/traitor_pipeline.svg"><img alt="../_images/traitor_pipeline.svg" src="../_images/traitor_pipeline.svg" width="60%" /></a>
+<figcaption>
+<p><span class="caption-text">Traitor Attack Pipeline</span><a class="headerlink" href="#id32" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p><strong>配置项</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># adversarial policy parameters</span>
+<span class="c1"># the id of adversarial agents</span>
+<span class="nt">adv_agent_ids</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]</span>
+<span class="c1"># Training required</span>
+<span class="nt">num_env_steps</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5000000</span>
+</pre></div>
+</div>
+<p><strong>使用方法</strong></p>
+<p>先训练victim智能体</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+<p>再训练adversary智能体，执行攻击</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;taitor_algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>taitor<span class="w"> </span>--victim<span class="w"> </span>&lt;victim_algo_name&gt;<span class="w"> </span>--victim.model_dir<span class="w"> </span>&lt;dir/to/your/model&gt;
+</pre></div>
+</div>
+<p>与此同时，在基于内鬼攻击的基础上，通过配置 <code class="docutils literal notranslate"><span class="pre">adv_agent_ids</span></code> 参数，可以指定内鬼智能体id，从而实现单内鬼攻击和多内鬼攻击。</p>
+<section id="id14">
+<h4><span class="section-number">7.2.2.1. </span>单内鬼攻击<a class="headerlink" href="#id14" title="Link to this heading"></a></h4>
+<p><strong>配置项</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">adv_agent_ids</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># 指定agent0为对手，其他智能体为受害者</span>
+</pre></div>
+</div>
+</section>
+<section id="id15">
+<h4><span class="section-number">7.2.2.2. </span>多内鬼攻击<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
+<p><strong>配置项</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">adv_agent_ids</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">2</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># 指定agent0和agent2为对手，其他智能体为受害者</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="dual">
+<span id="id16"></span><h2><span class="section-number">7.3. </span>基于群体对战的对抗策略攻击<a class="headerlink" href="#dual" title="Link to this heading"></a></h2>
+<p>在星际争霸II（SMAC）的环境中，我们自定义了一种对决场景，即将对阵的两个智能体团体分为天使组（Angel）和恶魔组（Demon），团队间是处于攻击、竞争状态，而团队内部是完全合作模式。在这样的场景中，可以分别训练Angel和Demon。</p>
+<p>在对决场景下训练的多智能体模型，又可以进行针对观测的扰动攻击和针对训练攻击策略的内鬼攻击。</p>
+<p><strong>无攻击下对决训练Pipeline</strong></p>
+<ol class="arabic simple">
+<li><p>在每个episode中，将执行以下收集数据的操作：</p>
+<ul class="simple">
+<li><p>Angel智能体执行 <code class="docutils literal notranslate"><span class="pre">collect</span></code> ，得到 <code class="docutils literal notranslate"><span class="pre">angel_actions</span></code></p></li>
+<li><p>Demon智能体执行 <code class="docutils literal notranslate"><span class="pre">perform</span></code> ，得到 <code class="docutils literal notranslate"><span class="pre">demon_actions</span></code></p></li>
+<li><p>与环境交互，执行 <code class="docutils literal notranslate"><span class="pre">env.step((angel_actions,</span> <span class="pre">demon_actions),</span> <span class="pre">filled)</span></code> ，得到 <code class="docutils literal notranslate"><span class="pre">obs,</span> <span class="pre">rewards,</span> <span class="pre">dones,</span> <span class="pre">infos</span></code> 等数据</p></li>
+<li><p>将数据插入到 <code class="docutils literal notranslate"><span class="pre">buffer</span></code> 中</p></li>
+</ul>
+</li>
+<li><p>执行 <code class="docutils literal notranslate"><span class="pre">buffer.compute_nstep_rewards</span></code> ，计算nstep奖励 <code class="docutils literal notranslate"><span class="pre">rewards</span></code></p></li>
+<li><p>调用Angel算法的 <code class="docutils literal notranslate"><span class="pre">train</span></code> 进行对Angel智能体的训练</p></li>
+</ol>
+<p><strong>调用方法</strong></p>
+<p>Dual Algorithm Training</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># In dual training, &quot;angel&quot; and &quot;demon&quot; are two competitive teams, where we only train &quot;angel&quot; but fix &quot;demon&quot;.</span>
+python<span class="w"> </span>-u<span class="w"> </span>dual_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--angel<span class="w"> </span>&lt;angel_algo_name&gt;<span class="w"> </span>--demon<span class="w"> </span>&lt;demon_algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>dual
+</pre></div>
+</div>
+<p>Load Victim Config from Directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># In dual training, you can load angel and demon separately, even from single training checkpoint.</span>
+python<span class="w"> </span>-u<span class="w"> </span>dual_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--load_angel<span class="w"> </span>&lt;dir/to/angel/results&gt;<span class="w"> </span>--load_victim<span class="w"> </span>&lt;dir/to/demon/results&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>dual
+</pre></div>
+</div>
+<p><strong>在Angel组中选定内鬼进行攻击Pipeline</strong></p>
+<ol class="arabic simple">
+<li><p>在每个episode中，将执行以下收集数据的操作：</p>
+<ul class="simple">
+<li><p>执行 <code class="docutils literal notranslate"><span class="pre">collect</span></code> 操作，其中分两部分，指定为对手的智能体执行 <code class="docutils literal notranslate"><span class="pre">sample</span></code> 操作，其他智能体执行 <code class="docutils literal notranslate"><span class="pre">collect</span></code> 操作，得到 <code class="docutils literal notranslate"><span class="pre">adv_actions</span></code></p></li>
+<li><p>Victim智能体执行 <code class="docutils literal notranslate"><span class="pre">perform</span></code> ，得到 <code class="docutils literal notranslate"><span class="pre">victim_actions</span></code></p></li>
+<li><p>Demon智能体执行 <code class="docutils literal notranslate"><span class="pre">perform</span></code> ，得到 <code class="docutils literal notranslate"><span class="pre">demon_actions</span></code></p></li>
+<li><p>与环境交互，执行 <code class="docutils literal notranslate"><span class="pre">env.step((victim_actions,</span> <span class="pre">demon_actions),</span> <span class="pre">filled)</span></code> ，得到 <code class="docutils literal notranslate"><span class="pre">obs,</span> <span class="pre">rewards,</span> <span class="pre">dones,</span> <span class="pre">infos</span></code> 等数据</p></li>
+<li><p>将数据插入到 <code class="docutils literal notranslate"><span class="pre">buffer</span></code> 中</p></li>
+</ul>
+</li>
+<li><p>执行 <code class="docutils literal notranslate"><span class="pre">buffer.compute_nstep_rewards</span></code> ，计算nstep奖励 <code class="docutils literal notranslate"><span class="pre">rewards</span></code></p></li>
+<li><p>调用对手智能体算法的 <code class="docutils literal notranslate"><span class="pre">train</span></code> 进行对对手智能体的训练</p></li>
+</ol>
+<p><strong>调用方法</strong></p>
+<p>只需要在对决训练的 <code class="docutils literal notranslate"><span class="pre">--run</span></code> 参数设置为 <code class="docutils literal notranslate"><span class="pre">traitor</span></code> 即可。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># In dual training, you can load angel and demon separately, even from single training checkpoint.</span>
+python<span class="w"> </span>-u<span class="w"> </span>dual_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--load_angel<span class="w"> </span>&lt;dir/to/angel/results&gt;<span class="w"> </span>--load_victim<span class="w"> </span>&lt;dir/to/demon/results&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>traitor
+</pre></div>
+</div>
+<div class="docutils container" id="id17">
+<div role="list" class="citation-list">
+<div class="citation" id="id18" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p>刘艾杉, 郭骏, 李思民, 肖宜松, 刘祥龙, and 陶大程. 面向深度强化学习的对抗攻防综述. <em>计算机学报</em>, August 2023. <a class="reference external" href="https://doi.org/10.11897/SP.J.1016.2023.01553">doi:10.11897/SP.J.1016.2023.01553</a>.</p>
+</div>
+<div class="citation" id="id19" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">2</a><span class="fn-bracket">]</span></span>
+<p>Vahid Behzadan and Arslan Munir. Vulnerability of Deep Reinforcement Learning to Policy Induction Attacks. In Petra Perner, editor, <em>International Conference on Machine Learning and Data Mining in Pattern Recognition</em>, Lecture Notes in Computer Science, 262–275. Cham, 2017. Springer International Publishing. <a class="reference external" href="https://doi.org/10.1007/978-3-319-62416-7_19">doi:10.1007/978-3-319-62416-7_19</a>.</p>
+</div>
+<div class="citation" id="id20" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id4">1</a>,<a role="doc-backlink" href="#id6">2</a>)</span>
+<p>Sandy Huang, Nicolas Papernot, Ian Goodfellow, Yan Duan, and Pieter Abbeel. Adversarial Attacks on Neural Network Policies. February 2017. <a class="reference external" href="https://arxiv.org/abs/1702.02284">arXiv:1702.02284</a>, <a class="reference external" href="https://doi.org/10.48550/arXiv.1702.02284">doi:10.48550/arXiv.1702.02284</a>.</p>
+</div>
+<div class="citation" id="id21" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">4</a><span class="fn-bracket">]</span></span>
+<p>Ian J. Goodfellow, Jonathon Shlens, and Christian Szegedy. Explaining and Harnessing Adversarial Examples. March 2015. <a class="reference external" href="https://arxiv.org/abs/1412.6572">arXiv:1412.6572</a>, <a class="reference external" href="https://doi.org/10.48550/arXiv.1412.6572">doi:10.48550/arXiv.1412.6572</a>.</p>
+</div>
+<div class="citation" id="id22" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id11">5</a><span class="fn-bracket">]</span></span>
+<p>Adam Gleave, Michael Dennis, Cody Wild, Neel Kant, Sergey Levine, and Stuart Russell. Adversarial Policies: Attacking Deep Reinforcement Learning. January 2021. <a class="reference external" href="https://arxiv.org/abs/1905.10615">arXiv:1905.10615</a>, <a class="reference external" href="https://doi.org/10.48550/arXiv.1905.10615">doi:10.48550/arXiv.1905.10615</a>.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="algorithm.html" class="btn btn-neutral float-left" title="6. 多智能体强化学习算法介绍" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, BUAA NLSDE。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

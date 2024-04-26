@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. 快速开始 &mdash; AMB v1.0.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=12f31cd9"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="5. 环境介绍" href="environment.html" />
+    <link rel="prev" title="3. 项目架构" href="architecture.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AMB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">文档目录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. 平台简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#id4">2. 项目成员</a></li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">3. 项目架构</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. 快速开始</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">4.1. 安装</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conda">4.1.1. 创建conda环境</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#starcraftii">4.1.2. 安装StarCraftII游戏引擎</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#google-research-football">4.1.3. 安装Google Research Football</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">4.2. 使用示例</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.2.1. 训练单个算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">4.2.2. 训练基于扰动的攻击算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4.2.3. 训练对抗性内鬼算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">4.2.4. 同时训练对抗双方算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">4.2.5. 从文件中加载受害者参数</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">4.3. 配置项</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">4.3.1. 环境配置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">4.3.2. 算法配置</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">4.4. 自定义</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id13">4.4.1. 自定义环境</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id14">4.4.1.1. 如何实现一个新的自定义环境</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id15">4.4.1.2. 自定义环境接口介绍</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id16">4.4.2. 自定义智能体</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id17">4.4.2.1. 如何实现一个新的自定义智能体</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id18">4.4.2.2. 自定义智能体接口介绍</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">5. 环境介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithm.html">6. 多智能体强化学习算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adversarial.html">7. 对抗攻击算法介绍</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AMB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4. </span>快速开始</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/handbook/quickstart.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">4. </span>快速开始<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<section id="id2">
+<h2><span class="section-number">4.1. </span>安装<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="conda">
+<h3><span class="section-number">4.1.1. </span>创建conda环境<a class="headerlink" href="#conda" title="Link to this heading"></a></h3>
+<p>使用anaconda管理实验环境，对实验环境进行隔离管理，确保依赖包的版本稳定。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># This will create an Anaconda environment named amb.</span>
+conda<span class="w"> </span>env<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>amb.yml
+</pre></div>
+</div>
+</section>
+<section id="starcraftii">
+<h3><span class="section-number">4.1.2. </span>安装StarCraftII游戏引擎<a class="headerlink" href="#starcraftii" title="Link to this heading"></a></h3>
+<p>切换到你想要安装StarCraftII游戏引擎的目录，然后执行以下指令：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://blzdistsc2-a.akamaihd.net/Linux/SC2.4.10.zip
+unzip<span class="w"> </span>-P<span class="w"> </span>iagreetotheeula<span class="w"> </span>SC2.4.10.zip
+rm<span class="w"> </span>-rf<span class="w"> </span>SC2.4.10.zip
+
+<span class="nb">cd</span><span class="w"> </span>StarCraftII/
+wget<span class="w"> </span>https://raw.githubusercontent.com/Blizzard/s2client-proto/master/stableid.json
+</pre></div>
+</div>
+<p>然后将安装StarCraftII的路径添加到bash或者zsh的系统变量。</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># for bash</span>
+vim<span class="w"> </span>~/.bashrc
+<span class="nb">export</span><span class="w"> </span><span class="nv">SC2PATH</span><span class="o">=</span><span class="s2">&quot;/path/to/your/StarCraftII&quot;</span>
+</pre></div>
+</div>
+<p>最后需要将 <code class="docutils literal notranslate"><span class="pre">amb/envs/smac/SMAC_Maps</span></code> 和 <code class="docutils literal notranslate"><span class="pre">amb/envs/smacv2/SMAC_Maps</span></code> 文件夹复制到 <code class="docutils literal notranslate"><span class="pre">StarCraftII/Maps</span></code> 下。</p>
+</section>
+<section id="google-research-football">
+<h3><span class="section-number">4.1.3. </span>安装Google Research Football<a class="headerlink" href="#google-research-football" title="Link to this heading"></a></h3>
+<p>首先安装一些系统级别的依赖（只有linux需要）：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>git<span class="w"> </span>cmake<span class="w"> </span>build-essential<span class="w"> </span>libgl1-mesa-dev<span class="w"> </span>libsdl2-dev<span class="w"> </span><span class="se">\</span>
+libsdl2-image-dev<span class="w"> </span>libsdl2-ttf-dev<span class="w"> </span>libsdl2-gfx-dev<span class="w"> </span>libboost-all-dev<span class="w"> </span><span class="se">\</span>
+libdirectfb-dev<span class="w"> </span>libst-dev<span class="w"> </span>mesa-utils<span class="w"> </span>xvfb<span class="w"> </span>x11vnc<span class="w"> </span>python3-pip
+</pre></div>
+</div>
+<p>然后通过 <code class="docutils literal notranslate"><span class="pre">pip</span></code> 安装 <code class="docutils literal notranslate"><span class="pre">GRF</span></code></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>gfootball
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id3">
+<h2><span class="section-number">4.2. </span>使用示例<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<section id="id4">
+<h3><span class="section-number">4.2.1. </span>训练单个算法<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>single
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">4.2.2. </span>训练基于扰动的攻击算法<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;perturbation_algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>perturbation<span class="w"> </span>--victim<span class="w"> </span>&lt;victim_algo_name&gt;<span class="w"> </span>--victim.model_dir<span class="w"> </span>&lt;dir/to/your/model&gt;
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3><span class="section-number">4.2.3. </span>训练对抗性内鬼算法<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--algo<span class="w"> </span>&lt;traitor_algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>traitor<span class="w"> </span>--victim<span class="w"> </span>&lt;victim_algo_name&gt;<span class="w"> </span>--victim.model_dir<span class="w"> </span>&lt;dir/to/your/model&gt;
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3><span class="section-number">4.2.4. </span>同时训练对抗双方算法<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># In dual training, &quot;angel&quot; and &quot;demon&quot; are two competitive teams, where we only train &quot;angel&quot; but fix &quot;demon&quot;.</span>
+python<span class="w"> </span>-u<span class="w"> </span>dual_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--angel<span class="w"> </span>&lt;angel_algo_name&gt;<span class="w"> </span>--demon<span class="w"> </span>&lt;demon_algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>dual
+</pre></div>
+</div>
+</section>
+<section id="id8">
+<h3><span class="section-number">4.2.5. </span>从文件中加载受害者参数<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># It will load environment and victim configurations from JSON, together with the victim&#39;s checkpoints in &quot;models/&quot; directory</span>
+python<span class="w"> </span>-u<span class="w"> </span>single_train.py<span class="w"> </span>--algo<span class="w"> </span>&lt;adv_algo_name&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span><span class="o">[</span>traitor<span class="p">|</span>perturbation<span class="o">]</span><span class="w"> </span>--load_victim<span class="w"> </span>&lt;dir/to/victim/results&gt;
+<span class="c1"># In dual training, you can load angel and demon separately, even from single training checkpoint.</span>
+python<span class="w"> </span>-u<span class="w"> </span>dual_train.py<span class="w"> </span>--env<span class="w"> </span>&lt;env_name&gt;<span class="w"> </span>--load_angel<span class="w"> </span>&lt;dir/to/angel/results&gt;<span class="w"> </span>--load_victim<span class="w"> </span>&lt;dir/to/demon/results&gt;<span class="w"> </span>--exp_name<span class="w"> </span>&lt;exp_name&gt;<span class="w"> </span>--run<span class="w"> </span>dual
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id9">
+<h2><span class="section-number">4.3. </span>配置项<a class="headerlink" href="#id9" title="Link to this heading"></a></h2>
+<section id="id10">
+<h3><span class="section-number">4.3.1. </span>环境配置<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># senario name</span>
+map_name:<span class="w"> </span>3s_vs_4z
+<span class="c1"># choose from FP (Feature Pruned) and EP (Environment Provided)</span>
+state_type:<span class="w"> </span>FP
+<span class="c1"># where to save the replay video</span>
+replay_dir:<span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="c1"># replay video&#39;s prefix</span>
+replay_prefix:<span class="w"> </span><span class="s2">&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h3><span class="section-number">4.3.2. </span>算法配置<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># seed:</span>
+<span class="c1"># whether to use the specified seed</span>
+seed_specify:<span class="w"> </span>True
+<span class="c1"># seed</span>
+seed:<span class="w"> </span><span class="m">1</span>
+<span class="c1"># device:</span>
+<span class="c1"># whether to use CUDA</span>
+cuda:<span class="w"> </span>True
+<span class="c1"># whether to set CUDA deterministic</span>
+cuda_deterministic:<span class="w"> </span>True
+<span class="c1"># arg to torch.set_num_threads</span>
+torch_threads:<span class="w"> </span><span class="m">4</span>
+<span class="c1"># train:</span>
+<span class="c1"># number of parallel environments for training data collection</span>
+n_rollout_threads:<span class="w"> </span><span class="m">20</span>
+<span class="c1"># number of total steps</span>
+num_env_steps:<span class="w"> </span><span class="m">10000000</span>
+<span class="c1"># max length of an episode</span>
+episode_length:<span class="w"> </span><span class="m">150</span>
+<span class="c1"># number of warmup steps</span>
+warmup_steps:<span class="w"> </span><span class="m">50000</span>
+<span class="c1"># number of steps per train</span>
+train_interval:<span class="w"> </span><span class="m">1000</span>
+<span class="c1"># ratio of training iterations to train_interval</span>
+update_per_train:<span class="w"> </span><span class="m">0</span>.05
+<span class="c1"># logging interval</span>
+log_interval:<span class="w"> </span><span class="m">20000</span>
+<span class="c1"># evaluation interval</span>
+eval_interval:<span class="w"> </span><span class="m">100000</span>
+<span class="c1"># whether to use linear learning rate decay</span>
+use_linear_lr_decay:<span class="w"> </span>False
+<span class="c1"># if set, load models from this directory; otherwise, randomly initialise the models</span>
+model_dir:<span class="w"> </span>~
+<span class="c1"># eval:</span>
+<span class="c1"># whether to use evaluation</span>
+use_eval:<span class="w"> </span>True
+<span class="c1"># number of parallel environments for evaluation</span>
+n_eval_rollout_threads:<span class="w"> </span><span class="m">10</span>
+<span class="c1"># number of episodes per evaluation</span>
+eval_episodes:<span class="w"> </span><span class="m">20</span>
+<span class="c1"># render:</span>
+<span class="c1"># whether to use render</span>
+use_render:<span class="w"> </span>False
+<span class="c1"># number of episodes to render</span>
+render_episodes:<span class="w"> </span><span class="m">10</span>
+<span class="c1"># model:</span>
+<span class="c1"># network parameters</span>
+<span class="c1"># hidden sizes for mlp module in the network</span>
+hidden_sizes:<span class="w"> </span><span class="o">[</span><span class="m">256</span>,<span class="w"> </span><span class="m">256</span><span class="o">]</span>
+<span class="c1"># activation function, choose from sigmoid, tanh, relu, leaky_relu, selu</span>
+activation_func:<span class="w"> </span>relu
+<span class="c1"># final activation function, choose from sigmoid, tanh, relu, leaky_relu, selu</span>
+final_activation_func:<span class="w"> </span>tanh
+<span class="c1"># whether to use feature normalization</span>
+use_feature_normalization:<span class="w"> </span>True
+<span class="c1"># initialization method for network parameters, choose from xavier_uniform_, orthogonal_, ...</span>
+initialization_method:<span class="w"> </span>orthogonal_
+<span class="c1"># optimizer parameters</span>
+<span class="c1"># actor learning rate</span>
+lr:<span class="w"> </span><span class="m">0</span>.0005
+<span class="c1"># critic learning rate</span>
+critic_lr:<span class="w"> </span><span class="m">0</span>.0005
+<span class="c1"># recurrent parameters</span>
+<span class="c1"># whether to use rnn policy (data is chunked for training)</span>
+use_recurrent_policy:<span class="w"> </span>False
+<span class="c1"># number of recurrent layers</span>
+recurrent_n:<span class="w"> </span><span class="m">1</span>
+<span class="c1"># algo:</span>
+<span class="c1"># discount factor</span>
+gamma:<span class="w"> </span><span class="m">0</span>.99
+<span class="c1"># off-policy buffer size</span>
+buffer_size:<span class="w"> </span><span class="m">5000</span>
+<span class="c1"># training batch size</span>
+batch_size:<span class="w"> </span><span class="m">1000</span>
+<span class="c1"># coefficient for target model soft update</span>
+polyak:<span class="w"> </span><span class="m">0</span>.005
+<span class="c1"># exploration noise</span>
+expl_noise:<span class="w"> </span><span class="m">0</span>.1
+<span class="c1"># the number of steps to look ahead</span>
+n_step:<span class="w"> </span><span class="m">1</span>
+<span class="c1"># whether to clip gradient norm</span>
+use_max_grad_norm:<span class="w"> </span>False
+<span class="c1"># max gradient norm</span>
+max_grad_norm:<span class="w"> </span><span class="m">10</span>.0
+<span class="c1"># whether to share parameter among actors</span>
+share_param:<span class="w"> </span>True
+<span class="c1"># whether to use policy active masks</span>
+use_policy_active_masks:<span class="w"> </span>True
+<span class="c1"># logger:</span>
+<span class="c1"># logging directory</span>
+log_dir:<span class="w"> </span><span class="s2">&quot;./results&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id12">
+<h2><span class="section-number">4.4. </span>自定义<a class="headerlink" href="#id12" title="Link to this heading"></a></h2>
+<section id="id13">
+<h3><span class="section-number">4.4.1. </span>自定义环境<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<section id="id14">
+<h4><span class="section-number">4.4.1.1. </span>如何实现一个新的自定义环境<a class="headerlink" href="#id14" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>修改环境本身，或给原有的环境套一个 <cite>wrapper</cite>，使得环境符合amb的接口</p></li>
+<li><p>修改 <cite>amb/utils/env_utils.py</cite>，在 <cite>make_train_env</cite>， <cite>make_eval_env</cite>， <cite>make_render_env</cite> 函数中添加自定义环境的信息</p></li>
+<li><p>修改 <cite>amb/utils/config_utils.py</cite>，在 <cite>get_task_name</cite> 中添加自定义环境任务名信息</p></li>
+</ul>
+</section>
+<section id="id15">
+<h4><span class="section-number">4.4.1.2. </span>自定义环境接口介绍<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>环境的配置参数全部写在 <cite>amb/configs/envs_cfgs/{环境名}.yaml</cite> 中，这些参数会被以字典形式读入，并借由 <cite>make_xxx_env</cite> 函数的 <cite>env_args</cite> 传入给环境</p></li>
+<li><p>你的环境类需要满足 <cite>amb/envs/env_example.py</cite> 中的所有接口，包括输入输出的类型限制和要求</p></li>
+</ul>
+<p>需要给 <cite>Dual</cite> 环境写一个专门的 <cite>logger</cite></p>
+</section>
+</section>
+<section id="id16">
+<h3><span class="section-number">4.4.2. </span>自定义智能体<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<section id="id17">
+<h4><span class="section-number">4.4.2.1. </span>如何实现一个新的自定义智能体<a class="headerlink" href="#id17" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>在 <cite>/amb/models</cite> 中有已经定义好的基础网络结构，可以在后续智能体构建过程中调用或者自定义新的网络</p></li>
+<li><p>在 <cite>/amb/agents</cite> 中已经实现了 <cite>coma_agent</cite> , <cite>ddpg_agent</cite> ， <cite>ppo_agnet</cite> ， <cite>q_agent</cite> 等智能体，可以以此为基础修改智能体或者自定义新智能体</p></li>
+<li><p>修改 <cite>/amb/algorithms/{算法名}.py</cite> ，选择自己使用的智能体</p></li>
+</ul>
+</section>
+<section id="id18">
+<h4><span class="section-number">4.4.2.2. </span>自定义智能体接口介绍<a class="headerlink" href="#id18" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>智能体的配置参数全部写在 <cite>amb/configs/algo_cfgs/{算法名}.yaml</cite> 中，这些参数会被以字典形式读入</p></li>
+<li><p>你的环境类需要满足 <cite>amb/agents/base_agent.py</cite> 中的所有接口，包括输入输出的类型限制和要求</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="architecture.html" class="btn btn-neutral float-left" title="3. 项目架构" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="environment.html" class="btn btn-neutral float-right" title="5. 环境介绍" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, BUAA NLSDE。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

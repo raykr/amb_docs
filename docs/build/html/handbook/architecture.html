@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. 项目架构 &mdash; AMB v1.0.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=12f31cd9"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="4. 快速开始" href="quickstart.html" />
+    <link rel="prev" title="1. 平台简介" href="introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AMB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">文档目录</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">1. 平台简介</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#id4">2. 项目成员</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. 项目架构</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">3.1. 算法内核简介</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#agents">3.1.1. agents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#algorithms">3.1.2. algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configs">3.1.3. configs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#data">3.1.4. data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#envs">3.1.5. envs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#models">3.1.6. models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#runners">3.1.7. runners</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#utils">3.1.8. utils</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">3.2. 支持环境列表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#marl">3.3. 支持MARL算法列表</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">3.4. 支持对抗攻击算法列表</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">4. 快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">5. 环境介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithm.html">6. 多智能体强化学习算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adversarial.html">7. 对抗攻击算法介绍</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AMB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3. </span>项目架构</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/handbook/architecture.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">3. </span>项目架构<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<img alt="../_images/code-arch.png" src="../_images/code-arch.png" />
+<section id="id2">
+<h2><span class="section-number">3.1. </span>算法内核简介<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+├── agents
+│   ├── base_agent.py
+│   ├── coma_agent.py
+│   ├── ddpg_agent.py
+│   ├── ppo_agent.py
+│   └── q_agent.py
+├── algorithms
+│   ├── igs.py
+│   ├── __init__.py
+│   ├── maddpg.py
+│   ├── mappo.py
+│   └── q.py
+├── configs
+│   ├── algos_cfgs
+│   └── envs_cfgs
+├── data
+│   └── episode_buffer.py
+├── envs
+│   ├── base_logger.py
+│   ├── dual_logger.py
+│   ├── env_example.py
+│   ├── env_wrappers.py
+│   ├── football
+│   ├── gym
+│   ├── __init__.py
+│   ├── mamujoco
+│   ├── metadrive
+│   ├── pettingzoo_mpe
+│   ├── quads
+│   ├── requirements.txt
+│   ├── smac
+│   ├── smacv2
+│   └── toy_example
+├── models
+│   ├── actor
+│   ├── base
+│   ├── critic
+│   └── mixer
+├── runners
+│   ├── dual
+│   ├── dual_traitor
+│   ├── __init__.py
+│   ├── perturbation
+│   ├── single
+│   └── traitor
+└── utils
+    ├── config_utils.py
+    ├── env_utils.py
+    ├── model_utils.py
+    ├── popart.py
+    └── trans_utils.py
+</pre></div>
+</div>
+<section id="agents">
+<h3><span class="section-number">3.1.1. </span>agents<a class="headerlink" href="#agents" title="Link to this heading"></a></h3>
+<p>agents目录下存放的是对智能体的抽象及实现。其中base_agent.py为智能体的抽象类，其他文件为不同算法的实现。BaseAgent类中包含的方法有：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">forward(obs,</span> <span class="pre">rnn_states,</span> <span class="pre">masks,</span> <span class="pre">available_actions=None)</span></code> : 用于智能体的前向传播，输入观测，输出动作概率分布（Distribution类）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sample(obs,</span> <span class="pre">available_actions=None)</span></code> : 用于从动作概率分布中采样动作。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">perform(obs,</span> <span class="pre">rnn_states,</span> <span class="pre">masks,</span> <span class="pre">available_actions=None,</span> <span class="pre">deterministic=False)</span></code> : 输入观测，输出动作概率。与forward的区别是，perform代表的是测试阶段的表现，通过deterministic来决定测试时是否要用随机策略。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">collect(obs,</span> <span class="pre">rnn_states,</span> <span class="pre">masks,</span> <span class="pre">available_actions=None,</span> <span class="pre">t=0)</span></code> : 用于训练阶段的数据采集，输入观测，输出动作概率分布，以及下一步的rnn状态。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">save(path)</span></code> : 保存模型。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">restore(path)</span></code> : 加载模型。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prep_training()</span></code> : 用于训练前的准备工作，包括重置rnn状态，重置动作概率分布等。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prep_rollout()</span></code> : 用于测试前的准备工作，包括重置rnn状态，重置动作概率分布等。</p></li>
+</ul>
+</section>
+<section id="algorithms">
+<h3><span class="section-number">3.1.2. </span>algorithms<a class="headerlink" href="#algorithms" title="Link to this heading"></a></h3>
+<p>algorithms目录下存放的是对算法的具体实现，封装了一个算法的具体实现流程。其中算法类中通过调用Agent对象来执行智能体具体的采样、执行动作等操作：</p>
+<ul class="simple">
+<li><p>igs.py:</p></li>
+<li><p>maddpg.py:</p></li>
+<li><p>mappo.py:</p></li>
+<li><p>q.py:</p></li>
+</ul>
+</section>
+<section id="configs">
+<h3><span class="section-number">3.1.3. </span>configs<a class="headerlink" href="#configs" title="Link to this heading"></a></h3>
+<p>configs为配置文件目录，包括算法配置文件和环境配置文件。</p>
+<ul class="simple">
+<li><p><strong>algos_cfgs</strong>：算法配置文件，包括算法的超参数配置，训练配置，模型配置等。</p></li>
+<li><p><strong>envs_cfgs</strong>：目录下为环境配置文件，包括环境的超参数配置，环境的观测空间，动作空间、智能体数量等。</p></li>
+</ul>
+</section>
+<section id="data">
+<h3><span class="section-number">3.1.4. </span>data<a class="headerlink" href="#data" title="Link to this heading"></a></h3>
+<p>data目录下定义了数据的组织方式。其中episode_buffer.py定义了数据的存储方式，包括数据的存储、读取、清空等操作。</p>
+</section>
+<section id="envs">
+<h3><span class="section-number">3.1.5. </span>envs<a class="headerlink" href="#envs" title="Link to this heading"></a></h3>
+<p>envs是平台提供的多智能体环境库，可以自定义添加，目前支持的环境列表见 <a class="reference internal" href="#id3">支持环境列表</a></p>
+</section>
+<section id="models">
+<h3><span class="section-number">3.1.6. </span>models<a class="headerlink" href="#models" title="Link to this heading"></a></h3>
+<p>models目录下存放的是智能体的网络结构，包括actor、critic、mixer等。</p>
+</section>
+<section id="runners">
+<h3><span class="section-number">3.1.7. </span>runners<a class="headerlink" href="#runners" title="Link to this heading"></a></h3>
+<p>runners目录下存放的是训练和测试的具体实现，包括：</p>
+<ul class="simple">
+<li><p>Single MARL training</p></li>
+<li><p>Perturbation-based attacks &amp; traitors</p></li>
+<li><p>Adversarial traitors</p></li>
+<li><p>Dual MARL training</p></li>
+<li><p>Traitors in dual MARL</p></li>
+</ul>
+</section>
+<section id="utils">
+<h3><span class="section-number">3.1.8. </span>utils<a class="headerlink" href="#utils" title="Link to this heading"></a></h3>
+<p>utils目录下存放的是一些工具函数，包括配置文件的读取、模型的保存与加载、环境的创建等。</p>
+</section>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.2. </span>支持环境列表<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="environment.html#smac"><span class="std std-ref">SMAC</span></a></p></li>
+<li><p><a class="reference internal" href="environment.html#smacv2"><span class="std std-ref">SMACv2</span></a></p></li>
+<li><p><a class="reference internal" href="environment.html#mamujoco"><span class="std std-ref">Multi-Agent MuJoCo</span></a></p></li>
+<li><p><a class="reference internal" href="environment.html#mpe"><span class="std std-ref">PettingZoo MPE</span></a></p></li>
+<li><p><a class="reference internal" href="environment.html#grf"><span class="std std-ref">Google Research Football</span></a></p></li>
+<li><p><a class="reference internal" href="environment.html#gym"><span class="std std-ref">Gym</span></a></p></li>
+<li><p><a class="reference internal" href="environment.html#toy"><span class="std std-ref">Toy Example</span></a></p></li>
+<li><p><a class="reference internal" href="environment.html#bi-dexhands"><span class="std std-ref">Bi-DexHands</span></a></p></li>
+<li><p><a class="reference internal" href="environment.html#quads"><span class="std std-ref">Quadrotor Swarms</span></a></p></li>
+<li><p><a class="reference internal" href="environment.html#network"><span class="std std-ref">Network System Control</span></a></p></li>
+<li><p><a class="reference internal" href="environment.html#voltage"><span class="std std-ref">Voltage Control</span></a></p></li>
+</ul>
+</section>
+<section id="marl">
+<h2><span class="section-number">3.3. </span>支持MARL算法列表<a class="headerlink" href="#marl" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="algorithm.html#ippo"><span class="std std-ref">IPPO(Independent Proximal Policy Optimization)</span></a></p></li>
+<li><p><a class="reference internal" href="algorithm.html#mappo"><span class="std std-ref">MAPPO(Multi-Agent Proximal Policy Optimization)</span></a></p></li>
+<li><p><a class="reference internal" href="algorithm.html#maddpg"><span class="std std-ref">MADDPG(Multi-agent deep deterministic policy gradient)</span></a></p></li>
+<li><p><a class="reference internal" href="algorithm.html#iql"><span class="std std-ref">IQL(Independent Q learning)</span></a></p></li>
+<li><p><a class="reference internal" href="algorithm.html#vdn"><span class="std std-ref">VDN(Value_Decomposition NetWorks)</span></a></p></li>
+<li><p><a class="reference internal" href="algorithm.html#qmix"><span class="std std-ref">QMIX</span></a></p></li>
+</ul>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.4. </span>支持对抗攻击算法列表<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="adversarial.html#randomnoise"><span class="std std-ref">随机噪声攻击</span></a></p></li>
+<li><p><a class="reference internal" href="adversarial.html#iterativeperturbation"><span class="std std-ref">最优动作抑制的扰动攻击</span></a></p></li>
+<li><p><a class="reference internal" href="adversarial.html#adaptiveaction"><span class="std std-ref">自适应动作的扰动攻击</span></a></p></li>
+<li><p><a class="reference internal" href="adversarial.html#randompolicy"><span class="std std-ref">随机策略攻击</span></a></p></li>
+<li><p><a class="reference internal" href="adversarial.html#traitor"><span class="std std-ref">零和博弈策略攻击</span></a></p></li>
+<li><p><a class="reference internal" href="adversarial.html#dual"><span class="std std-ref">基于群体对战的对抗策略攻击</span></a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="introduction.html" class="btn btn-neutral float-left" title="1. 平台简介" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="quickstart.html" class="btn btn-neutral float-right" title="4. 快速开始" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, BUAA NLSDE。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

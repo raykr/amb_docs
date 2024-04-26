@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="zh-CN" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. 平台简介 &mdash; AMB v1.0.0 文档</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=12f31cd9"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/translations.js?v=beaddf03"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="索引" href="../genindex.html" />
+    <link rel="search" title="搜索" href="../search.html" />
+    <link rel="next" title="3. 项目架构" href="architecture.html" />
+    <link rel="prev" title="欢迎使用 Adv MARL Benchmark 文档！" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            AMB
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="搜索文档" aria-label="搜索文档" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="导航菜单">
+              <p class="caption" role="heading"><span class="caption-text">文档目录</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. 平台简介</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.1. 平台研究背景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">1.2. 平台实现功能</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#id4">2. 项目成员</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#faculty">2.1. Faculty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phd-students">2.2. PhD Students</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mphil-students">2.3. MPhil Students</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#undergraduate-students">2.4. Undergraduate Students</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="architecture.html">3. 项目架构</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">4. 快速开始</a></li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">5. 环境介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="algorithm.html">6. 多智能体强化学习算法介绍</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adversarial.html">7. 对抗攻击算法介绍</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="移动版导航菜单" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">AMB</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="页面导航">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>平台简介</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/handbook/introduction.rst.txt" rel="nofollow"> 查看页面源码</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="id1">
+<h1><span class="section-number">1. </span>平台简介<a class="headerlink" href="#id1" title="Link to this heading"></a></h1>
+<p>“逐鹿”多智能体强化学习鲁棒性评测平台是由北京航空航天大学复杂关键软件环境全国重点实验室刘祥龙教授实验室开发的，对于多智能体强化学习的鲁棒性进行评测的平台。</p>
+<section id="id2">
+<h2><span class="section-number">1.1. </span>平台研究背景<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<p>以深度学习为代表的人工智能技术的迅速发展，为以多智能体强化学习为代表的智能决策领域带来了新的变革，极大地促进了自动驾驶、无人集群控制、金融决策等智能应用的发展，创造了惊人的社会价值。例如，在无人驾驶场景中，智能决策算法替代了人类决策，降低驾驶员的工作强度，并减少了交通事故；在无人集群控制中，智能决策算法通过自主决策，在国防安全、智能制造、抢险救灾等应用中发挥了不可替代的作用，极大减少了人员投入与人员安全风险；在金融决策中，智能决策算法通过实时判断当前状态，从而决定当前操作，具有远超人类的效率。以智能决策为首的人工智能技术被认为是下一个时代的基础技术，正在引领人类社会新的变革。在深度学习为多智能体强化学习和多智能体强化学习带来成功的同时，其脆弱性与鲁棒性也为强化学习和多智能体强化学习带来了较大的安全性风险，使得多智能体强化学习不鲁棒、不可靠、不可控。</p>
+<p>在多智能体强化学习部署过程中，智能体可能受到多样化不确定性影响。以合作类多智能体强化学习为例，其成功的重要原因是假设每一个智能体均最大化总体的奖励函数，这既是多智能体强化学习算法成功的前提，也为算法的理论分析与优化带来了重要的便利。但是，在实际算法部署过程中，智能体可能由于软硬件错误而做出随机不可控的动作，又或是被攻击者控制，做出最坏的动作。例如，在美国DARPA资助的OFFSET无人机群控制任务中，由于环境不确定性高、危险性高，无人机可能因耗尽电力而停飞，或在执行任务过程中因外力损毁。在此情况下，基于现有的多智能体强化学习训练出的策略需要能够在同伴的状态不可控的情况下继续完成鲁棒决策，从而完成给定任务；在自动驾驶场景中，如果假设所有无人车均共同合作遵循道路安全规范，则不遵守交通规则和安全规范的驾驶者可以被看作一个“攻击者”。无人车如果始终假设其他车辆均会遵循道路安全规范，在遇到“攻击者”时，将因为无法应对其他无人车的非合作行为，从而产生交通事故。实现鲁棒的多智能体强化学习是保障多智能体强化学习部署过程中的可信、可控的必由之路。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">1.2. </span>平台实现功能<a class="headerlink" href="#id3" title="Link to this heading"></a></h2>
+<p>平台实现评测标准多样化、鲁棒性能可调优、评测结果可落地、模型环境可自定的多智能体强化学习鲁棒性一体化评测流程。</p>
+<p>对于评测标准多样化而言，本平台根据马尔可夫决策过程中的状态、动作、环境、奖励函数四个维度，模拟真实环境中的多样化不确定性，对于多智能体强化学习训练、部署过程中的多样化鲁棒性缺失问题进行全面、一体化的评测，集成超过10种鲁棒性评测方法，保障算法落地过程中全面、可靠的部署。</p>
+<p>对于鲁棒性能可调优而言，本平台集成超过20种训练技巧，并支持对于不同算法、不同环境子任务、不同鲁棒性种类的训练技巧评测。用户可以根据自身部署场景的需要，自行根据需要的鲁棒性种类，选取本平台中最优的算法及训练技巧，或对于自身设计的算法进行参数调优，从而保障算法部署过程中的最优性能。</p>
+<p>对于评测结果可落地而言，本平台集成无人机控制、无人车控制、电网控制、灵巧手控制等高保真多智能体强化学习环境，并对于这些环境进行全方位的鲁棒性评价与测试，其结果将有助于这些领域的工作者在应用多智能体强化学习算法的过程中，评估不同多智能体强化学习算法在其领域内的性能和鲁棒性，并决定使用哪种多智能体强化学习算法、哪种多智能体强化学习技巧进行训练。</p>
+<p>对于模型环境可自定而言，本平台将多智能体强化学习智能体抽象为Agent类，对于本平台未集成的自定义多智能体强化学习算法实现，只需令待评测智能体满足Agent类规定的接口，即可将其上传至本平台进行评测。对于自定义环境而言，本平台满足任意基于Gym环境接口的算法评测，用户可以根据自身需要，灵活方便地进行自定义。</p>
+</section>
+</section>
+<section id="id4">
+<h1><span class="section-number">2. </span>项目成员<a class="headerlink" href="#id4" title="Link to this heading"></a></h1>
+<p>项目成员来自北京航空航天大学复杂关键软件环境全国重点实验室，包括：</p>
+<section id="faculty">
+<h2><span class="section-number">2.1. </span>Faculty<a class="headerlink" href="#faculty" title="Link to this heading"></a></h2>
+<center>
+     <figure>
+        <div align="left">
+             <div style="display:inline-block; width:35%; vertical-align:top">
+                 <img src="../_static/images/person/liuxianglong.jpg" style="width:200px; height:300px; margin-top: 10px;"/>
+             </div>
+             <div style="display:inline-block; width:60%">
+                 <h1 align="left">Xianglong Liu</h1>
+                 <p align="left" class="note">Professor</p>
+                 <p align="left"> <a href="http://www.nlsde.buaa.edu.cn/">State Key Laboratory of Software Development Environment</a><br>
+                 School of Computer Science and Engineering, Beihang University, China</p>
+                 <p align="left"> Office: Room G606, New Main Building<br>
+                     Address: 37 Xueyuan Road, Haidian, Beijing, China 100191<br>
+                     Tel.: +86-10-8233-8092 <br>
+                     Email: xlliu@nlsde.buaa.edu.cn / xlliu@buaa.edu.cn
+                 </p>
+                 <p align="left">
+                     <a href="http://sites.nlsde.buaa.edu.cn/~xlliu/">Homepage</a>
+                 </p>
+             </div>
+         </div>
+     </figure>
+ </center><center>
+    <figure>
+        <div align="left">
+             <div style="display:inline-block; width:35%; vertical-align:top">
+                 <img src="../_static/images/person/liuaishan.jpg" style="width:200px; height:300px; margin-top: 10px;"/>
+             </div>
+             <div style="display:inline-block; width:60%">
+                 <h1 align="left">Aishan Liu</h1>
+                 <p align="left" class="note">Associate Professor</p>
+                 <p align="left"> <a href="http://www.nlsde.buaa.edu.cn/">State Key Laboratory of Software Development Environment</a><br>
+                 School of Computer Science and Engineering, Beihang University, China</p>
+
+                 <p align="left">
+                     Office: Room G608, New Main Building<br>
+                     Email: liuaishan@buaa.edu.cn / liuaishan@nlsde.buaa.edu.cn<br>
+                     Address: No.37 Xueyuan Rd., Beijing, China
+                 </p>
+                 <p align="left">
+                     Homepage:
+                     <a href="http://sites.nlsde.buaa.edu.cn/~liuaishan/">Link1</a>
+                     <a href="https://liuaishan.github.io/">Link2</a>
+                 </p>
+             </div>
+         </div>
+     </figure>
+ </center></section>
+<section id="phd-students">
+<h2><span class="section-number">2.2. </span>PhD Students<a class="headerlink" href="#phd-students" title="Link to this heading"></a></h2>
+<center>
+    <figure>
+        <div align="left">
+             <div style="display:inline-block; width:35%; vertical-align:top">
+                 <img src="../_static/images/person/lisimin.jpg" style="width:200px; height:300px; margin-top: 10px;"/>
+             </div>
+             <div style="display:inline-block; width:60%">
+                 <h1 align="left">李思民</h1>
+                 <p align="left" class="note">博士三年级学生</p>
+                 <p align="left">
+                     <a href="http://www.nlsde.buaa.edu.cn/">北航复杂关键软件环境全国重点实验室</a><br>
+                     北航计算机学院
+                 </p>
+                 <p align="left">
+                     邮箱：lisiminsimon@buaa.edu.cn<br>
+                     地址：北京航空航天大学新主楼G602
+                 </p>
+                 <p align="left">
+                     主页：<a href="https://siminli.github.io">https://siminli.github.io</a>
+                 </p>
+             </div>
+         </div>
+     </figure>
+ </center></section>
+<section id="mphil-students">
+<h2><span class="section-number">2.3. </span>MPhil Students<a class="headerlink" href="#mphil-students" title="Link to this heading"></a></h2>
+<center>
+    <figure>
+        <div align="left">
+            <div style="display:inline-block; width:30%" align="center">
+                <div  style="margin:10px">
+                    <img src="../_static/images/person/guojun.jpg" style="height:250px;"/>
+                </div>
+                <h5>郭骏</h5>
+            </div>
+            <div style="display:inline-block; width:30%" align="center">
+                <div  style="margin:10px">
+                    <img src="../_static/images/person/jingzonglei.jpg" style="height:250px;"/>
+                </div>
+                <h5>景宗雷</h5>
+            </div>
+        </div>
+    </figure>
+</center></section>
+<section id="undergraduate-students">
+<h2><span class="section-number">2.4. </span>Undergraduate Students<a class="headerlink" href="#undergraduate-students" title="Link to this heading"></a></h2>
+<center>
+    <figure>
+        <div align="left">
+            <div style="display:inline-block; width:30%" align="center">
+                <div  style="margin:10px">
+                    <img src="../_static/images/person/zhouboyang.jpg"/>
+                </div>
+                <h5>周伯阳</h5>
+            </div>
+        </div>
+    </figure>
+</center></section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="页脚">
+        <a href="../index.html" class="btn btn-neutral float-left" title="欢迎使用 Adv MARL Benchmark 文档！" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> 上一页</a>
+        <a href="architecture.html" class="btn btn-neutral float-right" title="3. 项目架构" accesskey="n" rel="next">下一页 <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; 版权所有 2023, BUAA NLSDE。</p>
+  </div>
+
+  利用 <a href="https://www.sphinx-doc.org/">Sphinx</a> 构建，使用的 
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">主题</a>
+    由 <a href="https://readthedocs.org">Read the Docs</a> 开发.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
