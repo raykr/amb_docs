@@ -92,6 +92,34 @@ PhD Students
     </center>
 
 
+.. raw:: html
+
+   <center>
+       <figure>
+           <div align="left">
+                <div style="display:inline-block; width:35%; vertical-align:top">
+                    <img src="../_static/images/person/yuxin.jpg" style="width:200px; height:300px; margin-top: 10px;"/>
+                </div>
+                <div style="display:inline-block; width:60%">
+                    <h1 align="left">于鑫</h1>
+                    <p align="left" class="note">博士五年级学生</p>
+                    <p align="left"> 
+                        <a href="http://www.nlsde.buaa.edu.cn/">北航复杂关键软件环境全国重点实验室</a><br>
+                        北航计算机学院
+                    </p>
+                    <p align="left"> 
+                        邮箱：nlsdeyuxin@buaa.edu.cn<br>
+                        地址：北京航空航天大学新主楼G612
+                    </p>
+                    <p align="left">
+                        主页：<a href="https://xinyu-site.github.io/">https://xinyu-site.github.io/</a>
+                    </p>
+                </div>
+            </div>
+        </figure> 
+    </center>
+
+
 MPhil Students
 -----------------
 
