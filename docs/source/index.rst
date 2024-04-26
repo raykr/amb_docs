@@ -17,6 +17,7 @@
    handbook/environment
    handbook/algorithm
    handbook/adversarial
+   handbook/custom
 
 
 索引和表格
